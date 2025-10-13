@@ -30,6 +30,9 @@ export const meatTypes = ['mit Kalbfleisch'] as const;
 // Drehspieß sauce options (max 3 selectable)
 export const drehspiessaSauceTypes = ['Cocktail-Soße', 'scharfe Soße', 'Tzatziki', 'ohne Soße'] as const;
 
+// Snack sauce options (same as Drehspieß + Ketchup & Mayo)
+export const snackSauceTypes = ['Cocktail-Soße', 'scharfe Soße', 'Tzatziki', 'Ketchup', 'Mayonnaise', 'ohne Soße'] as const;
+
 // Salad exclusion options for Drehspieß items
 export const saladExclusionOptions = [
   'ohne Eisbergsalat',
