@@ -28,7 +28,7 @@ export const beerTypes = ['Becks', 'Herrenhäuser'] as const;
 export const meatTypes = ['mit Kalbfleisch'] as const;
 
 // Drehspieß sauce options (max 3 selectable)
-export const drehspiessaSauceTypes = ['Cocktail-Soße', 'scharfe Soße', 'Tzatziki'] as const;
+export const drehspiessaSauceTypes = ['Cocktail-Soße', 'scharfe Soße', 'Tzatziki', 'ohne Soße'] as const;
 
 // Salad exclusion options for Drehspieß items
 export const saladExclusionOptions = [
