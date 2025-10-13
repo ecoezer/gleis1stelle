@@ -454,14 +454,14 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {((item.isSpezialitaet && ![81, 82, 562, 563, 564, 565, 566].includes(item.id) && !item.isMeatSelection) ||
             (item.id >= 568 && item.id <= 573 && item.isSpezialitaet) ||
             (item.isMeatSelection && currentStep === 'sauce') ||
-            [16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number)) && (
+            [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number)) && (
             <div>
               <h3 className="font-semibold text-gray-900 mb-3">
-                {item.id >= 568 && item.id <= 573 ? 'Dressing wählen' : ((item.isMeatSelection && currentStep === 'sauce') || [74, 75, 76, 77, 78, 79].includes(item.number) ? 'Soßen wählen (max. 3)' : [11, 12, 14, 15, 16, 17, 18, 19, 20].includes(item.number) ? 'Soßen wählen (mehrere möglich)' : 'Soße wählen')}
-                {!item.isMeatSelection && ![11, 12, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number) && ((item.isSpezialitaet && ![81, 82].includes(item.id)) || (item.id >= 568 && item.id <= 573)) ? ' *' : ''}
+                {item.id >= 568 && item.id <= 573 ? 'Dressing wählen' : ((item.isMeatSelection && currentStep === 'sauce') || [74, 75, 76, 77, 78, 79].includes(item.number) ? 'Soßen wählen (max. 3)' : [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].includes(item.number) ? 'Soßen wählen (mehrere möglich)' : 'Soße wählen')}
+                {!item.isMeatSelection && ![8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number) && ((item.isSpezialitaet && ![81, 82].includes(item.id)) || (item.id >= 568 && item.id <= 573)) ? ' *' : ''}
               </h3>
 
-              {(item.isMeatSelection && currentStep === 'sauce') || [11, 12, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number) ? (
+              {(item.isMeatSelection && currentStep === 'sauce') || [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number) ? (
                 // Multiple selection for meat selection items in step 2 and snack items
                 <div className="space-y-2">
                   {getVisibleSauceOptions().map((sauce) => {
