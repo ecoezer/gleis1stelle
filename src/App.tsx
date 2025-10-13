@@ -156,7 +156,7 @@ function App() {
             <div className="flex-1">
               <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
             </div>
-            <img src="/Untitled-1.png" alt="Logo" className="h-10 w-10 rounded-full shadow-lg object-cover border-4 border-orange-200"/>
+            <img src="/Logo.png" alt="Logo" className="h-10 w-10 rounded-full shadow-lg object-cover border-4 border-orange-200"/>
           </div>
         </div>
         <Navigation />
