@@ -73,22 +73,16 @@ export const vegetarischeGerichte: readonly MenuItem[] = [
   { id: 579, number: 79, name: "Halloumi Tasche", description: "mit Halloumi, frischem Salat und Sauce nach Wahl", price: 7.50, isSpezialitaet: true, allergens: "Aa, I" }
 ];
 
-// Croques
+// Hamburger
 export const croques: readonly MenuItem[] = [
-  { id: 548, number: 48, name: "Brokkoli Croque", description: "mit Broccoli, Zwiebeln, Paprika & Spinat", price: 8.00, allergens: "A1, 1" },
-  { id: 549, number: 49, name: "Rindersalami Croque", description: "mit Rindersalami", price: 8.50, allergens: "A1, 1, C, G, 9, I" },
-  { id: 550, number: 50, name: "Putenschinken Croque", description: "mit Putenschinken", price: 8.50, allergens: "A1, 1, G, 9, 9, I, 12" },
-  { id: 551, number: 51, name: "Tonno Croque", description: "mit Thunfisch & Zwiebeln", price: 9.00, allergens: "A1, 1" },
-  { id: 552, number: 52, name: "Hawaii Croque", description: "mit Putenschinken & Ananas", price: 9.00, allergens: "A1, 1, G, 9, 9, I, 12" },
-  { id: 553, number: 53, name: "Feta Croque", description: "mit Weichkäse", price: 8.50, allergens: "A1, 1" },
-  { id: 554, number: 54, name: "Mozzarella Croque", description: "mit Mozzarella & frischen Tomaten", price: 8.50, allergens: "A1, 1" },
-  { id: 555, number: 55, name: "Sucuk Croque", description: "mit Knoblauchwurst", price: 9.00, allergens: "A1, 1, G, 4, 9, 3, 9, 12, 18" },
-  { id: 556, number: 56, name: "Pute Croque", description: "mit gegrilltem Putenfleisch, Zwiebeln & Mozzarella", price: 9.00, allergens: "A1, 1" },
-  { id: 557, number: 57, name: "Funghi Croque", description: "mit Champignons, Putenschinken & Weichkäse", price: 9.00, allergens: "A1, 1, G, 9, 9, I, 12" },
-  { id: 558, number: 58, name: "Hamburger Croque", description: "mit Hamburger-Patty, Röstzwiebeln", price: 9.00, allergens: "A1, 1, G, I, 4, 3, I0" },
-  { id: 559, number: 59, name: "Nuggets Croque", description: "mit Chicken-Nuggets & Paprika", price: 9.00, allergens: "A1, 1, 8, 9, I" },
-  { id: 560, number: 60, name: "Jalapenos Croque", description: "mit Putenschinken, Rindersalami & Peperoni", price: 9.00, allergens: "A1, 1, G, 9, 9, I, 12" },
-  { id: 561, number: 61, name: "Drehspieß Croque", description: "mit Drehspieß nach Wahl: Kalb oder Hähnchen", price: 9.00, allergens: "A1, 1, G, 4, 9, 3, 9, 12, 18" }
+  { id: 548, number: 8, name: "Crunchy Chicken Burger", description: "", price: 6.00, allergens: "Aa, I, 8.2" },
+  { id: 549, number: 9, name: "Crunchy Chicken Cheeseburger", description: "mit Schmelzkäse", price: 6.50, allergens: "Aa, I, 8.2" },
+  { id: 550, number: 10, name: "Hot Crunchy Chicken Burger", description: "mit Chilicheese, Jalapeños", price: 7.00, allergens: "Aa, I, 8.2" },
+  { id: 551, number: 11, name: "Hamburger", description: "Rindfleisch-Patty", price: 6.00, allergens: "Aa, B, G" },
+  { id: 552, number: 12, name: "Cheeseburger", description: "mit Schmelzkäse", price: 6.50, allergens: "Aa, B, G, I" },
+  { id: 553, number: 13, name: "Bacon Burger", description: "mit Bacon", price: 7.00, allergens: "Aa, B, G" },
+  { id: 554, number: 14, name: "BBQ Burger", description: "mit BBQ-Sauce & Bacon", price: 7.50, allergens: "Aa, B, G" },
+  { id: 555, number: 15, name: "Steakhouse Burger Cheese", description: "mit BBQ-Sauce, Bacon, Röstzwiebeln", price: 7.50, allergens: "" }
 ];
 
 // Snacks

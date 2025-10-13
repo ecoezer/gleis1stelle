@@ -40,7 +40,7 @@ const MENU_SECTIONS = [
   { id: 'snacks', title: 'Snacks', description: 'Kleine Gerichte und Menüs', items: snacks },
   { id: 'vegetarische-gerichte', title: 'Vegetarische Gerichte', description: 'Fleischlose Alternativen', items: vegetarischeGerichte },
   { id: 'pizza', title: 'Pizza', description: 'Frisch gebackene Pizzen', items: pizzas },
-  { id: 'croques', title: 'Croques', description: 'Knusprig überbacken', items: croques },
+  { id: 'croques', title: 'Hamburger', description: 'Alle Burger werden mit frischem Salat, Ketchup sowie Burger-Dressing serviert', items: croques },
   { id: 'salate', title: 'Salate', description: 'Frische Salate', items: salads },
   { id: 'dips', title: 'Dips & Soßen', description: 'Leckere Dips und Soßen', items: dips },
   { id: 'getraenke', title: 'Getränke', description: 'Erfrischende Getränke', items: drinks }
