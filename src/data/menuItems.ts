@@ -137,16 +137,15 @@ export const drinks: readonly MenuItem[] = [
 
 // Drehspieß (Meat dishes)
 export const fleischgerichte: readonly MenuItem[] = [
-  { id: 529, number: 1, name: "Drehspieß Tasche", description: "mit Drehspieß nach Wahl: Kalb oder Hähnchen im Fladenbrot, gemischtem Salat & Soße", price: 7.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1a, 12, 18" },
-  { id: 530, number: 2, name: "Drehspieß Dürüm", description: "mit Drehspieß nach Wahl: Kalb oder Hähnchen, gemischtem Salat & Soße", price: 8.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1a, 12, 18" },
-  { id: 531, number: 3, name: "Drehspieß Box", description: "mit Drehspieß nach Wahl: Kalb oder Hähnchen, Pommes frites & Soße", price: 7.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, 1a, 18" },
-  { id: 532, number: 4, name: "Drehspieß Teller (mit Pommes)", description: "mit Drehspieß nach Wahl: Kalb oder Hähnchen, Pommes frites oder Bulgur & Soße", price: 13.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1a, 4, 12, 18" },
-  { id: 533, number: 5, name: "Drehspieß (mit Salat)", description: "mit Drehspieß nach Wahl: Kalb oder Hähnchen, Salat & Soße", price: 13.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1a, 12, 18" },
-  { id: 534, number: 6, name: "Sucuk Tasche", description: "mit türkischer Knoblauchwurst im Fladenbrot, mit gemischtem Salat & Soße", price: 9.00, isSpezialitaet: true, allergens: "A1, G, 1a, 4, 9, 12, 18" },
-  { id: 535, number: 7, name: "Sucuk Teller", description: "mit türkischer Knoblauchwurst mit Bulgur oder Pommes, mit gemischtem Salat & Soße", price: 13.50, isSpezialitaet: true, allergens: "A1, G, 1a, 4, 9, 12, 18" },
-  { id: 536, number: 8, name: "Lahmacun Salat", description: "mit gemischtem Salat & Soße", price: 6.00, isSpezialitaet: true, allergens: "A1" },
-  { id: 537, number: 9, name: "Lahmacun Kalb oder Hähnchen", description: "Drehspieß nach Wahl: Kalb oder Hähnchen mit gemischtem Salat & Soße", price: 7.00, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1a, 12, 18" },
-  { id: 538, number: 10, name: "Lahmacun Weichkäse", description: "mit Weichkäse, gemischtem Salat & Soße", price: 7.00, isSpezialitaet: true, allergens: "A1" }
+  { id: 529, number: 1, name: "Drehspieß Tasche", description: "im Fladenbrot mit gemischtem Salat & Soße", price: 7.00, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1, M, 14, 17, 18" },
+  { id: 530, number: 2, name: "Drehspieß Dürüm", description: "Döner-Rolle mit gemischtem Salat & Soße", price: 8.00, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1, M, 14, 17, 18" },
+  { id: 531, number: 3, name: "Drehspieß Box", description: "mit Drehspießfleisch, Pommes frites & Soße", price: 8.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1, M, 14, 17, 18" },
+  { id: 532, number: 4, name: "Drehspieß Teller (mit Pommes)", description: "mit Drehspießfleisch, Pommes frites & Soße", price: 11.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1, M, 14, 17, 18" },
+  { id: 533, number: 5, name: "Drehspieß Teller (mit Salat)", description: "mit Drehspießfleisch, Salat & Soße", price: 11.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1, M, 14, 17, 18" },
+  { id: 534, number: 6, name: "Jalapeño Drehspieß Tasche", description: "im Fladenbrot mit gemischtem Salat, Sauce Hollandaise und Jalapeños", price: 7.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1, M, 14, 17, 18" },
+  { id: 535, number: 7, name: "Drehspieß Überbacken", description: "mit Sauce Hollandaise, Zwiebeln", price: 8.50, isSpezialitaet: true, isMeatSelection: true, allergens: "A1, G, 1, M, 14, 17, 18" },
+  { id: 536, number: 6, name: "Lahmacun mit Salat", description: "Rolle mit gemischtem Salat & Soße", price: 6.50, isSpezialitaet: true, allergens: "A1" },
+  { id: 537, number: 7, name: "Lahmacun Spezial", description: "Rolle mit gemischtem Salat, Weichkäse & Soße", price: 7.00, isSpezialitaet: true, allergens: "A1, G" }
 ];
 
 // Pizza dishes
