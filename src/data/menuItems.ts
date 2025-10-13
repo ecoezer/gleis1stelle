@@ -92,14 +92,12 @@ export const croques: readonly MenuItem[] = [
 
 // Snacks
 export const snacks: readonly MenuItem[] = [
-  { id: 580, number: 11, name: "Hamburger", description: "125g Burger-Patty", price: 5.50, isSpezialitaet: true, allergens: "A1, G" },
-  { id: 581, number: 12, name: "Cheeseburger", description: "125g Burger-Patty mit Schmelzkäse", price: 6.00, isSpezialitaet: true, allergens: "A1, C" },
-  { id: 582, number: 13, name: "Currywurst & Pommes", description: "mit würziger Currysauce und knusprigen Pommes frites", price: 8.50, allergens: "A1, C, 4, 8, 8, 9, I, 12" },
-  { id: 583, number: 14, name: "Hamburger Menü", description: "125g Burger-Patty, Pommes frites und Getränk", price: 11.00, isSpezialitaet: true, allergens: "A1, G" },
-  { id: 584, number: 15, name: "Cheeseburger Menü", description: "125g Burger-Patty mit Schmelzkäse, Pommes frites und Getränk", price: 11.50, isSpezialitaet: true, allergens: "A1, C" },
-  { id: 585, number: 16, name: "Chicken-Nuggets Menü", description: "6 Stück mit Pommes frites & Getränk", price: 10.00, isSpezialitaet: true, allergens: "A1, 8, 9, I" },
-  { id: 586, number: 17, name: "Pommes frites", description: "", price: 4.00, isSpezialitaet: true },
-  { id: 587, number: 18, name: "Chicken-Nuggets 6 Stück", description: "", price: 6.00, isSpezialitaet: true, allergens: "A1, 8, 9, I" }
+  { id: 586, number: 16, name: "Pommes klein", description: "", price: 3.00, isSpezialitaet: true },
+  { id: 586, number: 16, name: "Pommes groß", description: "", price: 4.50, isSpezialitaet: true },
+  { id: 587, number: 17, name: "Chicken-Nuggets", description: "6 Stk.", price: 5.50, isSpezialitaet: true, allergens: "Ao, I, 8.2" },
+  { id: 588, number: 18, name: "Chicken-Nuggets", description: "12 Stk.", price: 8.00, isSpezialitaet: true, allergens: "Ao, I, 8.2" },
+  { id: 589, number: 19, name: "Loaded Fries mit Hackfleisch", description: "mit Pommes, Rinderhackfleisch, Sauce und Käse", price: 7.50, isSpezialitaet: true },
+  { id: 590, number: 20, name: "Currywurst Pommes", description: "", price: 7.00, isSpezialitaet: true, allergens: "Ao, G, I, K, 6, 8.2, 9, 9.I, 17" }
 ];
 
 // Salads
