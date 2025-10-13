@@ -3,7 +3,7 @@ import { X, Plus, ShoppingCart } from 'lucide-react';
 import { MenuItem, PizzaSize } from '../types';
 import {
   wunschPizzaIngredients, pizzaExtras, pastaTypes,
-  sauceTypes, saladSauceTypes, pommesSauceTypes, beerTypes, meatTypes, saladExclusionOptions, sideDishOptions
+  sauceTypes, saladSauceTypes, pommesSauceTypes, beerTypes, meatTypes, saladExclusionOptions, sideDishOptions, drehspiessaSauceTypes
 } from '../data/menuItems';
 
 interface ItemModalProps {
@@ -79,11 +79,18 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
 
       const withoutOhneSose = prev.filter(s => s !== 'ohne Soße');
 
-      return withoutOhneSose.includes(sauce)
-        ? withoutOhneSose.filter(s => s !== sauce)
-        : [...withoutOhneSose, sauce];
+      if (withoutOhneSose.includes(sauce)) {
+        return withoutOhneSose.filter(s => s !== sauce);
+      }
+
+      // For Drehspieß items, limit to 3 sauces
+      if (item.isMeatSelection && withoutOhneSose.length >= 3) {
+        return withoutOhneSose;
+      }
+
+      return [...withoutOhneSose, sauce];
     });
-  }, []);
+  }, [item.isMeatSelection]);
 
   const calculatePrice = useCallback(() => {
     let basePrice = selectedSize ? selectedSize.price : item.price;
@@ -124,6 +131,10 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
   }, [item, selectedSize, selectedIngredients, selectedExtras, selectedPastaType, selectedSauce, selectedSauces, selectedMeatType, selectedExclusions, selectedSideDish, onAddToOrder, onClose, currentStep]);
 
   const getSauceOptions = useCallback(() => {
+    // Drehspieß items use special sauce types
+    if (item.isMeatSelection) {
+      return drehspiessaSauceTypes;
+    }
     if (item.id >= 568 && item.id <= 573 && item.isSpezialitaet) {
       return saladSauceTypes;
     }
@@ -134,7 +145,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
       return sauceTypes.filter(sauce => !['Tzatziki', 'Kräutersoße', 'Curry Sauce'].includes(sauce)).concat('Burger Sauce').sort();
     }
     return sauceTypes;
-  }, [item.id, item.number, item.isSpezialitaet]);
+  }, [item.id, item.number, item.isSpezialitaet, item.isMeatSelection]);
 
   const getVisibleSauceOptions = useCallback(() => {
     const allSauces = getSauceOptions();
@@ -201,21 +212,21 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           <div>
             <h2 className="text-xl font-bold">{getModalTitle()}</h2>
             {currentStep === 'meat' && item.description && (
-              <p className="text-sm opacity-90 mt-1">{item.description}</p>
+              <p className="text-sm opacity-90 mt-1">mit Kalbfleisch - {item.description}</p>
             )}
             {currentStep === 'sauce' && (
               <p className="text-sm opacity-90 mt-1">
-                {selectedMeatType} - Nr. {item.number} {item.name}
+                mit Kalbfleisch - Nr. {item.number} {item.name}
               </p>
             )}
             {currentStep === 'exclusions' && (
               <p className="text-sm opacity-90 mt-1">
-                {selectedMeatType} mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
+                mit Kalbfleisch mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
               </p>
             )}
             {currentStep === 'sidedish' && (
               <p className="text-sm opacity-90 mt-1">
-                {selectedMeatType} mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
+                mit Kalbfleisch mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
               </p>
             )}
           </div>
@@ -417,31 +428,19 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
             </div>
           )}
 
-          {/* Meat Selection - Only show in step 1 */}
+          {/* Meat Selection - Only show in step 1 - Now only Kalb */}
           {item.isMeatSelection && currentStep === 'meat' && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Fleischauswahl *</h3>
-              <div className="space-y-2">
-                {meatTypes.map((meatType) => (
-                  <label
-                    key={meatType}
-                    className={`flex items-center space-x-2 p-2 rounded-lg border-2 cursor-pointer transition-all ${
-                      selectedMeatType === meatType
-                        ? 'border-orange-500 bg-orange-50'
-                        : 'border-gray-200 hover:border-orange-300'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="meatType"
-                      value={meatType}
-                      checked={selectedMeatType === meatType}
-                      onChange={(e) => setSelectedMeatType(e.target.value)}
-                      className="text-orange-500 focus:ring-orange-500 w-4 h-4"
-                    />
-                    <span className="font-medium">{meatType}</span>
-                  </label>
-                ))}
+              <h3 className="font-semibold text-gray-900 mb-3">Fleischauswahl</h3>
+              <div className="p-4 rounded-lg border-2 border-orange-500 bg-orange-50">
+                <div className="flex items-center space-x-2">
+                  <div className="w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <span className="font-medium text-gray-900">mit Kalbfleisch</span>
+                </div>
               </div>
             </div>
           )}
@@ -452,31 +451,37 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
             (item.isMeatSelection && currentStep === 'sauce')) && (
             <div>
               <h3 className="font-semibold text-gray-900 mb-3">
-                {item.id >= 568 && item.id <= 573 ? 'Dressing wählen' : ((item.isMeatSelection && currentStep === 'sauce') || [11, 12, 14, 15, 16, 17, 18].includes(item.number) ? 'Soßen wählen (mehrere möglich)' : 'Soße wählen')}
+                {item.id >= 568 && item.id <= 573 ? 'Dressing wählen' : ((item.isMeatSelection && currentStep === 'sauce') ? 'Soßen wählen (max. 3)' : [11, 12, 14, 15, 16, 17, 18].includes(item.number) ? 'Soßen wählen (mehrere möglich)' : 'Soße wählen')}
                 {!item.isMeatSelection && ![11, 12, 14, 15, 16, 17, 18].includes(item.number) && ((item.isSpezialitaet && ![81, 82].includes(item.id)) || (item.id >= 568 && item.id <= 573)) ? ' *' : ''}
               </h3>
 
               {(item.isMeatSelection && currentStep === 'sauce') || [11, 12, 14, 15, 16, 17, 18].includes(item.number) ? (
                 // Multiple selection for meat selection items in step 2 and snack items
                 <div className="space-y-2">
-                  {getVisibleSauceOptions().map((sauce) => (
-                    <label
-                      key={sauce}
-                      className={`flex items-center space-x-2 p-2 rounded-lg border-2 cursor-pointer transition-all ${
-                        selectedSauces.includes(sauce)
-                          ? 'border-orange-500 bg-orange-50'
-                          : 'border-gray-200 hover:border-orange-300'
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedSauces.includes(sauce)}
-                        onChange={() => handleSauceToggle(sauce)}
-                        className="text-orange-500 focus:ring-orange-500 w-4 h-4"
-                      />
-                      <span className="font-medium">{sauce}</span>
-                    </label>
-                  ))}
+                  {getVisibleSauceOptions().map((sauce) => {
+                    const isDisabled = item.isMeatSelection && !selectedSauces.includes(sauce) && selectedSauces.length >= 3;
+                    return (
+                      <label
+                        key={sauce}
+                        className={`flex items-center space-x-2 p-2 rounded-lg border-2 transition-all ${
+                          selectedSauces.includes(sauce)
+                            ? 'border-orange-500 bg-orange-50'
+                            : isDisabled
+                            ? 'border-gray-200 opacity-50 cursor-not-allowed'
+                            : 'border-gray-200 hover:border-orange-300 cursor-pointer'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedSauces.includes(sauce)}
+                          onChange={() => handleSauceToggle(sauce)}
+                          disabled={isDisabled}
+                          className="text-orange-500 focus:ring-orange-500 w-4 h-4"
+                        />
+                        <span className="font-medium">{sauce}</span>
+                      </label>
+                    );
+                  })}
                 </div>
               ) : (
                 // Single selection for other items
