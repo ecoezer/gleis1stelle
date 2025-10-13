@@ -150,7 +150,7 @@ function App() {
         <div className="bg-white py-3">
           <div className="container mx-auto px-4 max-w-7xl lg:pr-80 flex items-center gap-4">
             <h1 className='text-sm font-bold text-gray-900'>
-              <span>by Ali und Mesut</span>
+              <span>Gleis1 Pizza & Döner</span>
               <div className='text-red-600 text-xs font-medium mt-0.5'>Lieferservice</div>
             </h1>
             <div className="flex-1">

@@ -223,7 +223,7 @@ function generateEmailHTML(orderData: OrderData): string {
             Bestellung eingegangen am ${new Date().toLocaleString('de-DE')}
           </p>
           <p style="margin: 8px 0 0 0; color: #6b7280; font-size: 12px;">
-            by Ali und Mesut 🚕 | Frankfurter Str. 7, 38729 Lutter am Barenberge
+            Gleis1 Pizza & Döner 🚕 | Frankfurter Str. 7, 38729 Lutter am Barenberge
           </p>
         </div>
       </div>
@@ -292,7 +292,7 @@ Deno.serve(async (req: Request) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'by Ali und Mesut <noreply@byaliundmesut.de>',
+        from: 'Gleis1 Pizza & Döner <noreply@byaliundmesut.de>',
         to: [restaurantEmail],
         subject: `🍕 Neue Bestellung von ${orderData.name} - ${orderData.total.toFixed(2).replace('.', ',')} €`,
         html: emailHTML,
