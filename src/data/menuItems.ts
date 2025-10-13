@@ -66,13 +66,12 @@ export const pizzaExtras = [
 
 // Vegetarian dishes
 export const vegetarischeGerichte: readonly MenuItem[] = [
-  { id: 519, number: 19, name: "Zigaretten Börek", description: "knusprige Börek-Röllchen, gefüllt mit Käse", price: 1.00, allergens: "A1, G" },
-  { id: 520, number: 20, name: "Halloumi-Tasche", description: "im Fladenbrot mit gegrilltem Halloumi, frischem Salat & Soße", price: 7.00, isSpezialitaet: true, allergens: "A1, G" },
-  { id: 521, number: 21, name: "Halloumi-Dürüm", description: "im dünnen Fladenbrot mit gegrilltem Halloumi, frischem Salat & Soße", price: 8.00, isSpezialitaet: true, allergens: "A1, G" },
-  { id: 522, number: 22, name: "Halloumi-Teller", description: "mit gegrilltem Halloumi, Bulgur oder Pommes, Salat & Soße", price: 13.50, isSpezialitaet: true, allergens: "A1, G" },
-  { id: 523, number: 23, name: "Falafel-Tasche", description: "im Fladenbrot mit hausgemachten Falafel, gemischtem Salat & Soße", price: 7.00, isSpezialitaet: true, allergens: "A1, F" },
-  { id: 524, number: 24, name: "Falafel-Dürüm", description: "im dünnen Fladenbrot mit Falafel, gemischtem Salat & Soße", price: 8.00, isSpezialitaet: true, allergens: "A1, F" },
-  { id: 525, number: 25, name: "Falafel-Teller", description: "mit Bulgur oder Pommes frites, gemischtem Salat & Soße", price: 13.50, isSpezialitaet: true, allergens: "A1, F" }
+  { id: 574, number: 74, name: "Vegetarische Tasche", description: "mit frischem Salat, Tomaten, Gurken, Kraut und Sauce nach Wahl", price: 5.50, isSpezialitaet: true, allergens: "Aa, I" },
+  { id: 575, number: 75, name: "Falafel Tasche", description: "mit Falafel, frischem Salat, Tomaten, Gurken, Kraut und Sauce nach Wahl", price: 6.00, isSpezialitaet: true, allergens: "Aa, E, G" },
+  { id: 576, number: 76, name: "Falafel Dürüm (Rolle)", description: "mit Falafel, frischem Salat, Tomaten, Gurken, Kraut und Sauce nach Wahl", price: 6.50, isSpezialitaet: true, allergens: "Aa, E, G" },
+  { id: 577, number: 77, name: "Falafel Teller", description: "mit Falafel, Pommes frites, frischem Salat und Sauce nach Wahl", price: 9.00, isSpezialitaet: true, allergens: "Aa, E, G" },
+  { id: 578, number: 78, name: "Falafel Box", description: "mit Falafel, Pommes frites, frischem Salat und Sauce nach Wahl", price: 8.00, isSpezialitaet: true, allergens: "Aa, E, G" },
+  { id: 579, number: 79, name: "Halloumi Tasche", description: "mit Halloumi, frischem Salat und Sauce nach Wahl", price: 7.50, isSpezialitaet: true, allergens: "Aa, I" }
 ];
 
 // Croques
