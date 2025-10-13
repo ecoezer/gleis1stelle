@@ -152,33 +152,149 @@ export const fleischgerichte: readonly MenuItem[] = [
 
 // Pizza dishes - sizes: ø28cm, ø32cm, ø40cm
 export const pizzas: readonly MenuItem[] = [
-  { id: 521, number: 21, name: "Margherita", description: "", price: 7.00, isPizza: true, allergens: "Aa, I" },
-  { id: 522, number: 22, name: "Salami", description: "", price: 8.00, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17" },
-  { id: 523, number: 23, name: "Schinken", description: "", price: 8.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17" },
-  { id: 524, number: 24, name: "Funghi", description: "mit Champignons", price: 8.00, isPizza: true, allergens: "Aa, I" },
-  { id: 525, number: 25, name: "Tonno", description: "mit Zwiebeln & Thunfisch", price: 9.00, isPizza: true, allergens: "Aa, E, I" },
-  { id: 526, number: 26, name: "Milano", description: "mit Salami & Pilzen", price: 9.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I" },
-  { id: 527, number: 27, name: "Primavera", description: "mit Schinken & Pilzen", price: 9.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17" },
-  { id: 528, number: 28, name: "Hawaii", description: "mit Schinken & Ananas", price: 9.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17" },
-  { id: 529, number: 29, name: "Vegetarisch", description: "mit Spinat, Paprika-Mix, Pilzen, Mais", price: 9.50, isPizza: true, allergens: "Aa, I" },
-  { id: 530, number: 30, name: "Chef Pizza", description: "mit Salami, Schinken, Paprika, Pilze", price: 10.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17" },
-  { id: 531, number: 31, name: "Sucuk", description: "", price: 9.00, isPizza: true, allergens: "Aa, B, G, I, M, 3, 6, 9, 14, 17, 18" },
-  { id: 532, number: 32, name: "Sucuk Spezial", description: "mit Pilzen & Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 6, 9, 14, 17, 18" },
-  { id: 533, number: 33, name: "Kebab Pizza", description: "mit Zwiebeln & Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 6, 9, 14, 17, 18" },
-  { id: 534, number: 34, name: "Kebab Spezial", description: "", price: 10.50, isPizza: true, allergens: "Aa, G, I, M, 14, 17, 18" },
-  { id: 535, number: 35, name: "Diavolo", description: "scharf, mit Salami & Jalapeños", price: 9.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I" },
-  { id: 536, number: 36, name: "Baba Pizza", description: "mit Kebabfleisch, Brokkoli, Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18" },
-  { id: 537, number: 37, name: "Chicken Spezial", description: "mit Hähnchenbrust, Pilze, Peperoni, Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18" },
-  { id: 538, number: 38, name: "La Mama", description: "mit Spinat, Tomatenscheiben, Mozzarella", price: 9.50, isPizza: true, allergens: "Aa, I" },
-  { id: 539, number: 39, name: "Mexico", description: "mit Hähnchenbrust, Brokkoli, Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18" },
-  { id: 540, number: 40, name: "Torino", description: "mit Salami, Tomatenscheiben, Mozzarella", price: 10.00, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I" },
-  { id: 541, number: 41, name: "Savona", description: "mit Spinat, Tomatenscheiben, Hirtenkäse", price: 10.00, isPizza: true, allergens: "Aa, I" },
-  { id: 542, number: 42, name: "BBQ Ranch", description: "mit BBQ, Salami, Bacon, Hackfleisch, Mozzarella", price: 12.50, isPizza: true, allergens: "Aa, I" },
-  { id: 543, number: 43, name: "BBQ Pizza", description: "mit BBQ, Hackfleisch, Zwiebeln, Bacon, Mozzarella", price: 12.50, isPizza: true, allergens: "Aa, I" },
-  { id: 544, number: 44, name: "New Orleans", description: "mit Hähnchenbrust, Bacon, Hackfleisch", price: 12.50, isPizza: true, allergens: "Aa, I" },
-  { id: 545, number: 45, name: "Green Garden", description: "mit Zwiebeln, Mais, Paprika, Brokkoli, Oliven", price: 12.50, isPizza: true, allergens: "Aa, I" },
-  { id: 546, number: 46, name: "Chicken & Curry", description: "mit Curry-Sauce, Ananas, Hähnchenbrust", price: 10.50, isPizza: true, allergens: "Aa, G, I, K, 6, 82, 9, 9.I, 17" },
-  { id: 547, number: 47, name: "Chicken Supreme", description: "mit Hähnchenbrust, Spinat, Mozzarella", price: 10.50, isPizza: true, allergens: "Aa, I" },
-  { id: 548, number: 48, name: "Pizza Gleis 1", description: "mit Hähnchenbrust, Hollandaise, Jalapeños", price: 12.50, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18" },
-  { id: 549, number: 49, name: "Margherita Deluxe", description: "mit Tomatenscheiben, Mozzarella", price: 10.50, isPizza: true, allergens: "Aa, I" }
+  { id: 521, number: 21, name: "Margherita", description: "", price: 7.00, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 7.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 10.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 15.00, description: 'ø40cm' }
+  ]},
+  { id: 522, number: 22, name: "Salami", description: "", price: 8.00, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17", sizes: [
+    { name: 'ø28cm', price: 8.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 11.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 18.00, description: 'ø40cm' }
+  ]},
+  { id: 523, number: 23, name: "Schinken", description: "", price: 8.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17", sizes: [
+    { name: 'ø28cm', price: 8.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 11.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 18.00, description: 'ø40cm' }
+  ]},
+  { id: 524, number: 24, name: "Funghi", description: "mit Champignons", price: 8.00, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 8.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 11.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 17.00, description: 'ø40cm' }
+  ]},
+  { id: 525, number: 25, name: "Tonno", description: "mit Zwiebeln & Thunfisch", price: 9.00, isPizza: true, allergens: "Aa, E, I", sizes: [
+    { name: 'ø28cm', price: 9.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 12.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 18.00, description: 'ø40cm' }
+  ]},
+  { id: 526, number: 26, name: "Milano", description: "mit Salami & Pilzen", price: 9.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I", sizes: [
+    { name: 'ø28cm', price: 9.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 12.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 18.50, description: 'ø40cm' }
+  ]},
+  { id: 527, number: 27, name: "Primavera", description: "mit Schinken & Pilzen", price: 9.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17", sizes: [
+    { name: 'ø28cm', price: 9.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 12.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 18.50, description: 'ø40cm' }
+  ]},
+  { id: 528, number: 28, name: "Hawaii", description: "mit Schinken & Ananas", price: 9.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17", sizes: [
+    { name: 'ø28cm', price: 9.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 12.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 18.50, description: 'ø40cm' }
+  ]},
+  { id: 529, number: 29, name: "Vegetarisch", description: "mit Spinat, Paprika-Mix, Pilzen, Mais", price: 9.50, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 9.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 12.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 19.50, description: 'ø40cm' }
+  ]},
+  { id: 530, number: 30, name: "Chef Pizza", description: "mit Salami, Schinken, Paprika, Pilze", price: 10.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I, 17", sizes: [
+    { name: 'ø28cm', price: 10.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 13.50, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 531, number: 31, name: "Sucuk", description: "", price: 9.00, isPizza: true, allergens: "Aa, B, G, I, M, 3, 6, 9, 14, 17, 18", sizes: [
+    { name: 'ø28cm', price: 9.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 12.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 21.00, description: 'ø40cm' }
+  ]},
+  { id: 532, number: 32, name: "Sucuk Spezial", description: "mit Pilzen & Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 6, 9, 14, 17, 18", sizes: [
+    { name: 'ø28cm', price: 10.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 13.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 533, number: 33, name: "Kebab Pizza", description: "mit Zwiebeln & Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 6, 9, 14, 17, 18", sizes: [
+    { name: 'ø28cm', price: 10.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 13.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 534, number: 34, name: "Kebab Spezial", description: "", price: 10.50, isPizza: true, allergens: "Aa, G, I, M, 14, 17, 18", sizes: [
+    { name: 'ø28cm', price: 10.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 14.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 23.00, description: 'ø40cm' }
+  ]},
+  { id: 535, number: 35, name: "Diavolo", description: "scharf, mit Salami & Jalapeños", price: 9.50, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I", sizes: [
+    { name: 'ø28cm', price: 9.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 12.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 20.50, description: 'ø40cm' }
+  ]},
+  { id: 536, number: 36, name: "Baba Pizza", description: "mit Kebabfleisch, Brokkoli, Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18", sizes: [
+    { name: 'ø28cm', price: 10.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 13.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 23.00, description: 'ø40cm' }
+  ]},
+  { id: 537, number: 37, name: "Chicken Spezial", description: "mit Hähnchenbrust, Pilze, Peperoni, Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18", sizes: [
+    { name: 'ø28cm', price: 10.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 13.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 538, number: 38, name: "La Mama", description: "mit Spinat, Tomatenscheiben, Mozzarella", price: 9.50, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 9.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 12.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 20.50, description: 'ø40cm' }
+  ]},
+  { id: 539, number: 39, name: "Mexico", description: "mit Hähnchenbrust, Brokkoli, Hollandaise", price: 10.00, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18", sizes: [
+    { name: 'ø28cm', price: 10.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 13.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 540, number: 40, name: "Torino", description: "mit Salami, Tomatenscheiben, Mozzarella", price: 10.00, isPizza: true, allergens: "Aa, B, I, G, 6, 9, 9.I", sizes: [
+    { name: 'ø28cm', price: 10.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 13.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 541, number: 41, name: "Savona", description: "mit Spinat, Tomatenscheiben, Hirtenkäse", price: 10.00, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 10.00, description: 'ø28cm' },
+    { name: 'ø32cm', price: 13.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 542, number: 42, name: "BBQ Ranch", description: "mit BBQ, Salami, Bacon, Hackfleisch, Mozzarella", price: 12.50, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 12.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 16.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 23.00, description: 'ø40cm' }
+  ]},
+  { id: 543, number: 43, name: "BBQ Pizza", description: "mit BBQ, Hackfleisch, Zwiebeln, Bacon, Mozzarella", price: 12.50, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 12.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 16.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 23.00, description: 'ø40cm' }
+  ]},
+  { id: 544, number: 44, name: "New Orleans", description: "mit Hähnchenbrust, Bacon, Hackfleisch", price: 12.50, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 12.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 16.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 23.00, description: 'ø40cm' }
+  ]},
+  { id: 545, number: 45, name: "Green Garden", description: "mit Zwiebeln, Mais, Paprika, Brokkoli, Oliven", price: 12.50, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 12.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 16.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.50, description: 'ø40cm' }
+  ]},
+  { id: 546, number: 46, name: "Chicken & Curry", description: "mit Curry-Sauce, Ananas, Hähnchenbrust", price: 10.50, isPizza: true, allergens: "Aa, G, I, K, 6, 82, 9, 9.I, 17", sizes: [
+    { name: 'ø28cm', price: 10.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 14.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 547, number: 47, name: "Chicken Supreme", description: "mit Hähnchenbrust, Spinat, Mozzarella", price: 10.50, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 10.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 14.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 22.00, description: 'ø40cm' }
+  ]},
+  { id: 548, number: 48, name: "Pizza Gleis 1", description: "mit Hähnchenbrust, Hollandaise, Jalapeños", price: 12.50, isPizza: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18", sizes: [
+    { name: 'ø28cm', price: 12.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 16.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 23.00, description: 'ø40cm' }
+  ]},
+  { id: 549, number: 49, name: "Margherita Deluxe", description: "mit Tomatenscheiben, Mozzarella", price: 10.50, isPizza: true, allergens: "Aa, I", sizes: [
+    { name: 'ø28cm', price: 10.50, description: 'ø28cm' },
+    { name: 'ø32cm', price: 14.00, description: 'ø32cm' },
+    { name: 'ø40cm', price: 20.00, description: 'ø40cm' }
+  ]}
 ];
