@@ -1,15 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw } from 'lucide-react';
+import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw, Monitor, Smartphone } from 'lucide-react';
 import { fetchOrders, OrderData } from '../services/orderService';
 
 interface AdminOrderHistoryProps {
   onLogout: () => void;
 }
 
+type TimeFilter = 'all' | 'today' | 'week' | 'month';
+
 const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
   const [orders, setOrders] = useState<OrderData[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<OrderData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>('all');
+
+  const filterOrders = (allOrders: OrderData[], filter: TimeFilter) => {
+    if (filter === 'all') {
+      return allOrders;
+    }
+
+    const now = new Date();
+    const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const startOfWeek = new Date(now);
+    startOfWeek.setDate(now.getDate() - now.getDay());
+    startOfWeek.setHours(0, 0, 0, 0);
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    return allOrders.filter(order => {
+      let orderDate: Date;
+      if (order.created_at?.toDate) {
+        orderDate = order.created_at.toDate();
+      } else if (order.created_at?.seconds) {
+        orderDate = new Date(order.created_at.seconds * 1000);
+      } else {
+        orderDate = new Date(order.created_at);
+      }
+
+      switch (filter) {
+        case 'today':
+          return orderDate >= startOfDay;
+        case 'week':
+          return orderDate >= startOfWeek;
+        case 'month':
+          return orderDate >= startOfMonth;
+        default:
+          return true;
+      }
+    });
+  };
 
   const loadOrders = async () => {
     setIsLoading(true);
@@ -18,6 +57,7 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
     try {
       const fetchedOrders = await fetchOrders();
       setOrders(fetchedOrders);
+      setFilteredOrders(filterOrders(fetchedOrders, timeFilter));
     } catch (err) {
       setError('Failed to load orders. Please try again.');
       console.error('Error loading orders:', err);
@@ -29,6 +69,10 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
   useEffect(() => {
     loadOrders();
   }, []);
+
+  useEffect(() => {
+    setFilteredOrders(filterOrders(orders, timeFilter));
+  }, [timeFilter, orders]);
 
   const formatDate = (timestamp: any) => {
     if (!timestamp) return 'N/A';
@@ -48,6 +92,8 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
       minute: '2-digit',
     });
   };
+
+  const totalAmount = filteredOrders.reduce((sum, order) => sum + order.total_amount, 0);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50">
@@ -77,6 +123,59 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+          <div className="flex flex-wrap gap-2 mb-4">
+            <button
+              onClick={() => setTimeFilter('all')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                timeFilter === 'all'
+                  ? 'bg-orange-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              All Time
+            </button>
+            <button
+              onClick={() => setTimeFilter('today')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                timeFilter === 'today'
+                  ? 'bg-orange-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Today
+            </button>
+            <button
+              onClick={() => setTimeFilter('week')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                timeFilter === 'week'
+                  ? 'bg-orange-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              This Week
+            </button>
+            <button
+              onClick={() => setTimeFilter('month')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                timeFilter === 'month'
+                  ? 'bg-orange-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              This Month
+            </button>
+          </div>
+          <div className="flex justify-between items-center">
+            <p className="text-lg font-semibold text-gray-900">
+              Orders: <span className="text-orange-600">{filteredOrders.length}</span>
+            </p>
+            <p className="text-lg font-semibold text-gray-900">
+              Total Revenue: <span className="text-orange-600">{totalAmount.toFixed(2).replace('.', ',')} €</span>
+            </p>
+          </div>
+        </div>
+
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
@@ -85,21 +184,15 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
           <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center">
             <p className="text-red-700">{error}</p>
           </div>
-        ) : orders.length === 0 ? (
+        ) : filteredOrders.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
             <ShoppingBag className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">No orders yet</h2>
-            <p className="text-gray-600">Orders will appear here once customers place them.</p>
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">No orders found</h2>
+            <p className="text-gray-600">No orders match the selected time filter.</p>
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
-              <p className="text-lg font-semibold text-gray-900">
-                Total Orders: <span className="text-orange-600">{orders.length}</span>
-              </p>
-            </div>
-
-            {orders.map((order) => (
+            {filteredOrders.map((order) => (
               <div key={order.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div className="space-y-4">
@@ -124,6 +217,32 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
                         <span>{order.delivery_address}</span>
                       </div>
                     </div>
+
+                    {(order.device_type || order.ip_address || order.browser_info) && (
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 space-y-2">
+                        <p className="text-sm font-medium text-gray-900">Device Information</p>
+                        {order.device_type && (
+                          <div className="flex items-center gap-2 text-sm text-gray-700">
+                            {order.device_type === 'Mobile' || order.device_type === 'Tablet' ? (
+                              <Smartphone className="w-4 h-4 text-blue-600" />
+                            ) : (
+                              <Monitor className="w-4 h-4 text-blue-600" />
+                            )}
+                            <span>{order.device_type}</span>
+                          </div>
+                        )}
+                        {order.ip_address && (
+                          <p className="text-sm text-gray-700">
+                            <span className="font-medium">IP:</span> {order.ip_address}
+                          </p>
+                        )}
+                        {order.browser_info && (
+                          <p className="text-sm text-gray-700 break-all">
+                            <span className="font-medium">Browser:</span> {order.browser_info.split(' - ')[0]}
+                          </p>
+                        )}
+                      </div>
+                    )}
 
                     {order.notes && (
                       <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
