@@ -321,6 +321,18 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
                             <span>{order.device_type}</span>
                           </div>
                         )}
+                        {order.ip_address && (
+                          <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                            <span className="font-medium">IP:</span>
+                            <span>{order.ip_address}</span>
+                          </div>
+                        )}
+                        {order.browser_info && (
+                          <div className="flex items-start gap-1.5 text-xs text-gray-600">
+                            <span className="font-medium">Browser:</span>
+                            <span className="break-all">{order.browser_info}</span>
+                          </div>
+                        )}
                       </div>
                     )}
 
