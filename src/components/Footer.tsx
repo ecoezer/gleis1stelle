@@ -85,6 +85,36 @@ const Footer = () => {
             © 2025 Gleis1 Döner & Pizza 🚕 - Alle Rechte vorbehalten
           </p>
         </div>
+
+        {/* Allergens and Additives */}
+        <div className="bg-white/60 rounded-xl p-4 text-left">
+          <h3 className="font-bold text-gray-800 text-sm mb-2">Allergene und Zusatzstoffe:</h3>
+          <div className="text-xs text-gray-700 space-y-1 leading-relaxed">
+            <p><strong>(1)</strong> mit Süßungsmitteln, <strong>(2)</strong> chininhaltig, <strong>(3)</strong> mit Farbstoffen</p>
+            <p><strong>(3.1)</strong> Könnten die Aktivität und Aufmerksamkeit von Kindern beeinträchtigen</p>
+            <p><strong>(4)</strong> koffeinhaltig</p>
+            <p><strong>(4.1)</strong> enthält Koffein. Für Kinder, schwangere Frauen und koffeinempfindliche Personen nicht geeignet</p>
+            <p><strong>(5)</strong> mit Taurin, <strong>(6)</strong> mit Antioxidationsmitteln, <strong>(7)</strong> mit Phosphat (E 338 bis E 341, E 450 bis E 452)</p>
+            <p><strong>(8)</strong> mit Eiweiß, <strong>(8.1)</strong> mit Milcheiweiß, <strong>(8.2)</strong> mit Stärke</p>
+            <p><strong>(9)</strong> mit Konservierungsstoffen, <strong>(9.1)</strong> mit Nitritpökelsalz, <strong>(9.2)</strong> mit Nitrat</p>
+            <p><strong>(10)</strong> gewachst, <strong>(11)</strong> Schwefeldioxid (mehr als 10 mg/kg o. 10 mg/l)</p>
+            <p><strong>(12)</strong> geschwärzt (Eisen-II-gluconat (E 579) oder Eisen-II-lactat (E 585)</p>
+            <p><strong>(13)</strong> enthält eine Phenylalaninquelle (z.B. Aspartam), <strong>(14)</strong> mit Geschmacksverstärker</p>
+            <p><strong>(15)</strong> Erhöhter Koffeingehalt. Für Kinder und Schwangere oder stillende Frauen nicht empfohlen (Getränke mit mehr als 150 mg Koffein pro Liter - hier 300 mg)</p>
+            <p><strong>(16)</strong> hergestellt aus zerkleinertem Fleisch, <strong>(17)</strong> Stabilisatoren, <strong>(18)</strong> Säuerungsmittel/-regulatoren</p>
+            <p><strong>(19)</strong> gentechnisch verändert</p>
+
+            <div className="mt-3 pt-3 border-t border-gray-300">
+              <p className="mb-1"><strong>A)</strong> Glutenhaltige Getreide/-erzeugnisse (a. Weizen, b. Roggen, c. Gerste, d. Hafer, e. Dinkel, f. Kamut o. g. Hybridstämme)</p>
+              <p><strong>B)</strong> Sellerie/-erzeugnisse, <strong>C)</strong> Krebstiere/-erzeugnisse, <strong>D)</strong> Lupine/-erzeugnisse</p>
+              <p><strong>E)</strong> Sesam/-erzeugnisse, <strong>F)</strong> Fisch/-erzeugnisse, <strong>G)</strong> Senf/-erzeugnisse</p>
+              <p><strong>H)</strong> Erdnüsse/-erzeugnisse, <strong>I)</strong> Milch/-erzeugnisse (inkl. Laktose)</p>
+              <p><strong>J)</strong> Schalenfrüchte (Nüsse)-erzeugnisse (a. Mandel, b. Haselnuss, c. Walnuss, d. Cashew, e. Pekannuss, f. Paranuss, g. Pistazie, h. Macadamianuss o. i. Queenslandnuss)</p>
+              <p><strong>K)</strong> Eier/-erzeugnisse, <strong>L)</strong> Weichtiere/-erzeugnisse</p>
+              <p><strong>M)</strong> Soja/-erzeugnisse, <strong>N)</strong> Sulfite (mehr als 10 mg/kg o. 10 mg/l)</p>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );
