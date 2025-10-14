@@ -305,9 +305,10 @@ const OrderForm: React.FC<OrderFormProps> = ({
         ].filter(Boolean).join(' | ')
       };
 
-      // Save order to Firebase first
-      await saveOrder(orderData);
-      console.log('Order saved to Firebase successfully');
+      // Save order to Firebase in background (don't block WhatsApp)
+      saveOrder(orderData)
+        .then(() => console.log('Order saved to Firebase successfully'))
+        .catch(error => console.error('Error saving order to Firebase:', error));
 
       // Generate WhatsApp message
       const whatsappMessage = generateWhatsAppMessage(data);
