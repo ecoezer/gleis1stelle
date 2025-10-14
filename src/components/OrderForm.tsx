@@ -794,6 +794,8 @@ const OrderForm: React.FC<OrderFormProps> = ({
                     const times = [];
                     const now = new Date();
                     const minTime = new Date(now.getTime() + 20 * 60 * 1000);
+                    const isMonday = now.getDay() === 1;
+                    const openingHour = isMonday ? 16 : 12;
 
                     let minutes = Math.ceil(minTime.getMinutes() / 5) * 5;
                     let hours = minTime.getHours();
@@ -804,13 +806,13 @@ const OrderForm: React.FC<OrderFormProps> = ({
                     }
 
                     const startMinutes = hours * 60 + minutes;
-                    const endMinutes = 21 * 60 + 30;
+                    const endMinutes = 22 * 60 + 30;
 
                     for (let totalMinutes = startMinutes; totalMinutes <= endMinutes; totalMinutes += 5) {
                       const h = Math.floor(totalMinutes / 60);
                       const m = totalMinutes % 60;
 
-                      if (h < 12 || h > 21 || (h === 21 && m > 30)) continue;
+                      if (h < openingHour || h > 22 || (h === 22 && m > 30)) continue;
 
                       const timeStr = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
                       times.push(timeStr);
