@@ -270,9 +270,64 @@ const OrderForm: React.FC<OrderFormProps> = ({
     if (!canOrder || orderItems.length === 0) return;
 
     setIsSubmitting(true);
-    
+
     try {
-      // Send email notification first
+      // Save order to database
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      const deliveryAddress = data.orderType === 'delivery'
+        ? `${data.street} ${data.houseNumber}, ${data.postcode}${data.deliveryZone ? ` (${DELIVERY_ZONES[data.deliveryZone as keyof typeof DELIVERY_ZONES]?.label})` : ''}`
+        : 'Abholung';
+
+      const orderData = {
+        customer_name: data.name,
+        customer_phone: data.phone,
+        customer_email: null,
+        delivery_address: deliveryAddress,
+        items: orderItems.map(item => ({
+          menuItemId: item.menuItem.id,
+          menuItemNumber: item.menuItem.number,
+          name: item.menuItem.name,
+          quantity: item.quantity,
+          basePrice: item.selectedSize ? item.selectedSize.price : item.menuItem.price,
+          selectedSize: item.selectedSize,
+          selectedIngredients: item.selectedIngredients,
+          selectedExtras: item.selectedExtras,
+          selectedPastaType: item.selectedPastaType,
+          selectedSauce: item.selectedSauce,
+          selectedExclusions: item.selectedExclusions,
+          selectedSideDish: item.selectedSideDish,
+          totalPrice: calculateItemPrice(item) * item.quantity
+        })),
+        total_amount: total,
+        notes: [
+          data.orderType === 'pickup' ? 'Abholung' : 'Lieferung',
+          data.deliveryTime === 'asap' ? 'So schnell wie möglich' : `Um ${data.specificTime} Uhr`,
+          data.note
+        ].filter(Boolean).join(' | ')
+      };
+
+      try {
+        const response = await fetch(`${supabaseUrl}/rest/v1/orders`, {
+          method: 'POST',
+          headers: {
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(orderData)
+        });
+
+        if (!response.ok) {
+          console.warn('Failed to save order to database');
+        }
+      } catch (error) {
+        console.warn('Error saving order to database:', error);
+      }
+
+      // Send email notification
       try {
         const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-order-email`;
         const emailResponse = await fetch(apiUrl, {
@@ -298,7 +353,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
             total
           }),
         });
-        
+
         if (emailResponse.ok) {
           console.log('Email notification sent successfully');
         } else {
@@ -307,14 +362,14 @@ const OrderForm: React.FC<OrderFormProps> = ({
       } catch (error) {
         console.warn('Email notification error:', error);
       }
-      
+
       // Generate WhatsApp message
       const whatsappMessage = generateWhatsAppMessage(data);
       const whatsappUrl = `https://wa.me/+4915771459166?text=${whatsappMessage}`;
-      
+
       // Open WhatsApp
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      
+
       if (isMobile) {
         try {
           const whatsappWindow = window.open(whatsappUrl, '_blank');
@@ -328,13 +383,13 @@ const OrderForm: React.FC<OrderFormProps> = ({
       } else {
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
       }
-      
+
       // Clear cart and form after successful order
       setTimeout(() => {
         onClearCart();
         reset();
       }, 1000);
-      
+
     } catch (error) {
       console.error('Order submission error:', error);
     } finally {
