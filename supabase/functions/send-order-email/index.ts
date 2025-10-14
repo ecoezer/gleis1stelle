@@ -57,7 +57,6 @@ Deno.serve(async (req: Request) => {
 
     const orderData: OrderData = await req.json();
 
-    // Build email HTML
     let emailHtml = `
       <html>
         <head>
@@ -158,7 +157,6 @@ Deno.serve(async (req: Request) => {
       </html>
     `;
 
-    // Send email via Resend
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
