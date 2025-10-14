@@ -1,10 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { X, Plus, ShoppingCart, AlertTriangle } from 'lucide-react';
+import { X, Plus, ShoppingCart, AlertTriangle, Info } from 'lucide-react';
 import { MenuItem, PizzaSize } from '../types';
 import {
   wunschPizzaIngredients, pizzaExtras, pastaTypes,
   sauceTypes, saladSauceTypes, pommesSauceTypes, beerTypes, saladExclusionOptions, sideDishOptions, drehspiessaSauceTypes, snackSauceTypes, pizzabroetchenSauceTypes
 } from '../data/menuItems';
+import { parseAllergens } from '../data/allergenData';
 
 interface ItemModalProps {
   item: MenuItem;
@@ -44,6 +45,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
   const [showAllSauces, setShowAllSauces] = useState(false);
   const [showAllExclusions, setShowAllExclusions] = useState(false);
   const [showAgeWarning, setShowAgeWarning] = useState(false);
+  const [showAllergenPopup, setShowAllergenPopup] = useState(false);
 
   const handleIngredientToggle = useCallback((ingredient: string) => {
     setSelectedIngredients(prev => {
@@ -220,6 +222,75 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
 
   if (!isOpen) return null;
 
+  const allergenList = parseAllergens(item.allergens);
+
+  // Allergen Info Popup
+  if (showAllergenPopup) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-70 z-[70] flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl">
+          <div className="sticky top-0 bg-orange-500 text-white p-4 rounded-t-xl flex justify-between items-center">
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              <Info className="w-6 h-6" />
+              Allergene & Zusatzstoffe
+            </h2>
+            <button
+              onClick={() => setShowAllergenPopup(false)}
+              className="p-2 hover:bg-orange-600 rounded-full transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="p-6">
+            <div className="mb-4">
+              <h3 className="font-bold text-gray-900 text-lg mb-2">{item.name}</h3>
+              {item.description && (
+                <p className="text-gray-600 text-sm">{item.description}</p>
+              )}
+            </div>
+
+            {allergenList.length > 0 ? (
+              <div className="space-y-3">
+                <h4 className="font-semibold text-gray-900">Dieses Produkt enthält:</h4>
+                <div className="space-y-2">
+                  {allergenList.map((allergen, index) => (
+                    <div
+                      key={index}
+                      className="bg-orange-50 border border-orange-200 rounded-lg p-3"
+                    >
+                      <div className="flex items-start gap-2">
+                        <span className="font-bold text-orange-600 flex-shrink-0">
+                          ({allergen.code})
+                        </span>
+                        <span className="text-gray-800 text-sm leading-relaxed">
+                          {allergen.description}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
+                <p className="text-gray-600">Keine Allergeninformationen verfügbar</p>
+              </div>
+            )}
+
+            <div className="mt-6">
+              <button
+                onClick={() => setShowAllergenPopup(false)}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold transition-colors"
+              >
+                Schließen
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Age verification warning modal
   if (showAgeWarning) {
     return (
@@ -350,6 +421,26 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
         </div>
 
         <div className="p-6 space-y-6">
+          {/* Allergen Information Banner */}
+          {item.allergens && allergenList.length > 0 && (
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <Info className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="text-gray-800 font-medium mb-1">
+                    Allergene: {item.allergens}
+                  </p>
+                  <button
+                    onClick={() => setShowAllergenPopup(true)}
+                    className="text-blue-600 hover:text-blue-700 font-semibold underline text-sm"
+                  >
+                    Hier klicken für Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Age Restriction Warning for Alcoholic Drinks */}
           {[593, 594].includes(item.id) && (
             <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
