@@ -245,22 +245,42 @@ const OrderForm: React.FC<OrderFormProps> = ({
         houseNumber: data.houseNumber,
         postcode: data.postcode,
         note: data.note,
-        orderItems,
+        orderItems: orderItems.map(item => ({
+          menuItemId: item.menuItem.id,
+          menuItemNumber: item.menuItem.number,
+          name: item.menuItem.name,
+          quantity: item.quantity,
+          basePrice: item.selectedSize ? item.selectedSize.price : item.menuItem.price,
+          selectedSize: item.selectedSize || null,
+          selectedIngredients: item.selectedIngredients || null,
+          selectedExtras: item.selectedExtras || null,
+          selectedPastaType: item.selectedPastaType || null,
+          selectedSauce: item.selectedSauce || null,
+          selectedExclusions: item.selectedExclusions || null,
+          selectedSideDish: item.selectedSideDish || null,
+          totalPrice: calculateItemPrice(item) * item.quantity
+        })),
         subtotal,
         deliveryFee,
         total
       };
 
-      const response = await fetch('/api/send-order-email', {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/send-order-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${supabaseAnonKey}`,
         },
         body: JSON.stringify(emailData),
       });
 
       if (!response.ok) {
         console.warn('Email notification failed, but continuing with WhatsApp order');
+      } else {
+        console.log('Email notification sent successfully');
       }
     } catch (error) {
       console.warn('Email notification error:', error);
@@ -309,6 +329,11 @@ const OrderForm: React.FC<OrderFormProps> = ({
       saveOrder(orderData)
         .then(() => console.log('Order saved to Firebase successfully'))
         .catch(error => console.error('Error saving order to Firebase:', error));
+
+      // Send email notification in background (don't block WhatsApp)
+      sendEmailNotification(data)
+        .then(() => console.log('Email notification sent successfully'))
+        .catch(error => console.error('Error sending email notification:', error));
 
       // Generate WhatsApp message
       const whatsappMessage = generateWhatsAppMessage(data);
