@@ -10,6 +10,7 @@ const ADMIN_PASSWORD = 'Zb^73ZnP9T%Hr!';
 const SimpleAdminLogin: React.FC<SimpleAdminLoginProps> = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [shake, setShake] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,12 +21,14 @@ const SimpleAdminLogin: React.FC<SimpleAdminLoginProps> = ({ onLoginSuccess }) =
     } else {
       setError('Invalid password');
       setPassword('');
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
+      <div className={`bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md ${shake ? 'animate-shake' : ''}`}>
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4">
             <Lock className="w-8 h-8 text-orange-600" />
