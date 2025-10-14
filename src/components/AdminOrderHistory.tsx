@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw, Monitor, Smartphone, Calendar } from 'lucide-react';
-import { fetchOrders, OrderData } from '../services/orderService';
+import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw, Monitor, Smartphone, Calendar, Trash2 } from 'lucide-react';
+import { fetchOrders, deleteOrder, OrderData } from '../services/orderService';
 
 interface AdminOrderHistoryProps {
   onLogout: () => void;
@@ -18,6 +18,7 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
   const [customEndDate, setCustomEndDate] = useState('');
   const [minDate, setMinDate] = useState('');
   const [maxDate, setMaxDate] = useState('');
+  const [deletingOrderId, setDeletingOrderId] = useState<string | null>(null);
 
   const getOrderDate = (order: OrderData): Date => {
     if (order.created_at?.toDate) {
@@ -125,6 +126,28 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
       hour: '2-digit',
       minute: '2-digit',
     });
+  };
+
+  const handleDeleteOrder = async (orderId: string) => {
+    if (!orderId) return;
+
+    const confirmDelete = window.confirm('Möchten Sie diese Bestellung wirklich löschen?');
+    if (!confirmDelete) return;
+
+    setDeletingOrderId(orderId);
+
+    try {
+      await deleteOrder(orderId);
+
+      const updatedOrders = orders.filter(order => order.id !== orderId);
+      setOrders(updatedOrders);
+      setFilteredOrders(filterOrders(updatedOrders, timeFilter, customStartDate, customEndDate));
+    } catch (err) {
+      console.error('Error deleting order:', err);
+      alert('Fehler beim Löschen der Bestellung. Bitte versuchen Sie es erneut.');
+    } finally {
+      setDeletingOrderId(null);
+    }
   };
 
   const totalAmount = filteredOrders.reduce((sum, order) => sum + order.total_amount, 0);
@@ -279,8 +302,21 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
         ) : (
           <div className="space-y-3">
             {filteredOrders.map((order) => (
-              <div key={order.id} className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div key={order.id} className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative">
+                <button
+                  onClick={() => handleDeleteOrder(order.id!)}
+                  disabled={deletingOrderId === order.id}
+                  className="absolute top-3 right-3 p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  title="Bestellung löschen"
+                >
+                  {deletingOrderId === order.id ? (
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-red-600"></div>
+                  ) : (
+                    <Trash2 className="w-4 h-4" />
+                  )}
+                </button>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pr-10">
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5 text-xs text-gray-500">

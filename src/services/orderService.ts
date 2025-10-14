@@ -1,4 +1,4 @@
-import { collection, addDoc, query, orderBy, getDocs, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, query, orderBy, getDocs, deleteDoc, doc, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
 interface OrderItem {
@@ -92,6 +92,15 @@ export const fetchOrders = async (): Promise<OrderData[]> => {
     })) as OrderData[];
   } catch (error) {
     console.error('Error fetching orders:', error);
+    throw error;
+  }
+};
+
+export const deleteOrder = async (orderId: string): Promise<void> => {
+  try {
+    await deleteDoc(doc(db, 'orders', orderId));
+  } catch (error) {
+    console.error('Error deleting order:', error);
     throw error;
   }
 };
