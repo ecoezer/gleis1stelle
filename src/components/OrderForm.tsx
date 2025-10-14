@@ -161,7 +161,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
 
   // Generate WhatsApp message
   const generateWhatsAppMessage = useCallback((data: OrderFormData) => {
-    let message = `*Neue Bestellung - by Ali und Mesut*\n\n`;
+    let message = `*Neue Bestellung*\n\n`;
 
     // Customer info
     message += `*Kunde:* ${data.name}\n`;
