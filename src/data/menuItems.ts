@@ -149,19 +149,21 @@ export const dips: readonly MenuItem[] = [
 
 // Drinks
 export const drinks: readonly MenuItem[] = [
-  { id: 100, name: "Coca-Cola", description: "0,33 L", price: 2.00 },
-  { id: 101, name: "Coca-Cola Zero", description: "0,33 L", price: 2.00 },
-  { id: 102, name: "Fanta Orange", description: "0,33 L", price: 2.00 },
-  { id: 103, name: "Fanta Exotic", description: "0,33 L", price: 2.00 },
-  { id: 104, name: "Sprite", description: "0,33 L", price: 2.00 },
-  { id: 105, name: "Mezzo-mix", description: "0,33 L", price: 2.00 },
-  { id: 106, name: "Apfelschorle", description: "0,33 L", price: 2.00 },
-  { id: 107, name: "Eistee Pfirsich", description: "0,33 L", price: 2.00 },
-  { id: 108, name: "Capri-Sonne", description: "0,20 L", price: 1.50 },
-  { id: 109, name: "Ayran", description: "0,25 L", price: 1.50 },
-  { id: 110, name: "Wasser", description: "0,33 L", price: 2.00 },
-  { id: 111, name: "Bier", description: "0,33 L", price: 2.00 },
-  { id: 112, name: "Alkoholfreies Bier", description: "0,33 L", price: 2.00 }
+  { id: 580, number: 80, name: "Coca Cola", description: "0,33l", price: 2.00, allergens: "3, 4, 18" },
+  { id: 581, number: 81, name: "Coca Cola Zero", description: "0,33l", price: 2.00, allergens: "1, 3, 4, 13, 18" },
+  { id: 582, number: 82, name: "Fanta", description: "0,33l", price: 2.00, allergens: "3, 6, 17, 18" },
+  { id: 583, number: 83, name: "Fanta Exotic", description: "0,33l", price: 2.00, allergens: "1, 3, 13, 17, 18" },
+  { id: 584, number: 84, name: "Sprite", description: "0,33l", price: 2.00, allergens: "18" },
+  { id: 585, number: 85, name: "Mezzo Mix", description: "0,33l", price: 2.00, allergens: "3, 4, 17, 18" },
+  { id: 586, number: 86, name: "Ayran", description: "0,25l", price: 2.00, allergens: "I" },
+  { id: 587, number: 87, name: "Wasser", description: "0,5l", price: 1.50 },
+  { id: 588, number: 88, name: "Coca Cola", description: "1,0l", price: 3.20, allergens: "3, 4, 18" },
+  { id: 589, number: 89, name: "Coca Cola Zero", description: "1,0l", price: 3.20, allergens: "1, 3, 4, 13, 18" },
+  { id: 590, number: 90, name: "Fanta", description: "1,0l", price: 3.20, allergens: "3, 6, 17, 18" },
+  { id: 591, number: 91, name: "Sprite", description: "1,0l", price: 3.20, allergens: "18" },
+  { id: 592, number: 92, name: "Mezzo Mix", description: "1,0l", price: 3.20, allergens: "3, 4, 17, 18" },
+  { id: 593, number: 93, name: "Becks Pils", description: "0,33l", price: 2.50, allergens: "Aa" },
+  { id: 594, number: 94, name: "Einbecker Pils", description: "0,33l", price: 2.50, allergens: "Aa" }
 ];
 
 // Drehspieß (Meat dishes)
