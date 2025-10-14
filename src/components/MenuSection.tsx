@@ -70,8 +70,13 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
                   {item.number}
                 </span>
                 <div>
-                  <h3 className={`text-lg font-bold ${isRippchenSpecial || isSchnitzelSpecial ? 'text-red-600' : 'text-gray-900'}`}>
+                  <h3 className={`text-lg font-bold ${isRippchenSpecial || isSchnitzelSpecial ? 'text-red-600' : 'text-gray-900'} flex items-center gap-2`}>
                     {item.name}
+                    {[593, 594].includes(item.id) && (
+                      <span className="text-xs font-bold px-2 py-0.5 rounded bg-gray-900 text-white">
+                        18+
+                      </span>
+                    )}
                   </h3>
                   {item.description && <p className="text-gray-600 mt-1">{item.description}</p>}
                   {item.allergens && <p className="text-xs text-gray-500 mt-2"><strong>Allergene:</strong> <span className="italic">{item.allergens}</span></p>}
