@@ -4,8 +4,23 @@ import { MapPin, Phone, Heart } from 'lucide-react';
 const Footer = () => {
   const [copied, setCopied] = useState(false);
   const [showAllergens, setShowAllergens] = useState(false);
+  const allergensRef = React.useRef<HTMLDivElement>(null);
   const phoneNumber = '+4915771459166';
   const displayNumber = '01577 1459166';
+
+  const handleAllergensToggle = () => {
+    const newState = !showAllergens;
+    setShowAllergens(newState);
+
+    if (newState && allergensRef.current) {
+      setTimeout(() => {
+        allergensRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }, 100);
+    }
+  };
 
   const handleWhatsApp = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -88,9 +103,9 @@ const Footer = () => {
         </div>
 
         {/* Allergens and Additives - Expandable */}
-        <div className="bg-white/60 rounded-xl p-4">
+        <div ref={allergensRef} className="bg-white/60 rounded-xl p-4">
           <button
-            onClick={() => setShowAllergens(!showAllergens)}
+            onClick={handleAllergensToggle}
             className="w-full text-center hover:bg-white/80 transition-colors rounded-lg p-2"
           >
             <h3 className="font-bold text-gray-800 text-sm">
