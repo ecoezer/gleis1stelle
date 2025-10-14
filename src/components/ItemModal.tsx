@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { X, Plus, ShoppingCart } from 'lucide-react';
+import { X, Plus, ShoppingCart, AlertTriangle } from 'lucide-react';
 import { MenuItem, PizzaSize } from '../types';
 import {
   wunschPizzaIngredients, pizzaExtras, pastaTypes,
@@ -197,7 +197,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
         return 'Schritt 4: Beilage wählen';
       }
     }
-    return `Nr. ${item.number} ${item.name}`;
+    return item.name;
   }, [item, currentStep]);
 
   const getButtonText = useCallback(() => {
@@ -219,7 +219,14 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
         {/* Header */}
         <div className="sticky top-0 bg-orange-500 text-white p-4 rounded-t-xl flex justify-between items-center">
           <div>
-            <h2 className="text-xl font-bold">{getModalTitle()}</h2>
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              {getModalTitle()}
+              {[593, 594].includes(item.id) && (
+                <span className="text-xs font-bold px-2 py-0.5 rounded bg-white text-gray-900">
+                  18+
+                </span>
+              )}
+            </h2>
             {currentStep === 'meat' && item.description && (
               <p className="text-sm opacity-90 mt-1">mit Kalbfleisch - {item.description}</p>
             )}
@@ -261,6 +268,30 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
         </div>
 
         <div className="p-6 space-y-6">
+          {/* Age Restriction Warning for Alcoholic Drinks */}
+          {[593, 594].includes(item.id) && (
+            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-gray-800 font-medium">
+                    Dies ist ein Artikel mit Altersbeschränkung.
+                  </p>
+                  <p className="text-gray-700 mt-1">
+                    Dein/e Fahrer:in wird deinen gültigen Lichtbildausweis überprüfen.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Price Display for Simple Items */}
+          {[593, 594].includes(item.id) && (
+            <div className="text-2xl font-bold text-gray-900">
+              {item.price.toFixed(2).replace('.', ',')} €
+            </div>
+          )}
+
           {/* Step indicator for meat selection items */}
           {item.isMeatSelection && (
             <div className="flex items-center justify-center space-x-2 mb-4">
