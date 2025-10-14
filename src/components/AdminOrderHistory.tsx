@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw, Monitor, Smartphone } from 'lucide-react';
+import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw, Monitor, Smartphone, Calendar } from 'lucide-react';
 import { fetchOrders, OrderData } from '../services/orderService';
 
 interface AdminOrderHistoryProps {
   onLogout: () => void;
 }
 
-type TimeFilter = 'all' | 'today' | 'week' | 'month';
+type TimeFilter = 'all' | 'today' | 'week' | 'month' | 'year' | 'custom';
 
 const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
   const [orders, setOrders] = useState<OrderData[]>([]);
@@ -14,8 +14,22 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [timeFilter, setTimeFilter] = useState<TimeFilter>('all');
+  const [customStartDate, setCustomStartDate] = useState('');
+  const [customEndDate, setCustomEndDate] = useState('');
+  const [minDate, setMinDate] = useState('');
+  const [maxDate, setMaxDate] = useState('');
 
-  const filterOrders = (allOrders: OrderData[], filter: TimeFilter) => {
+  const getOrderDate = (order: OrderData): Date => {
+    if (order.created_at?.toDate) {
+      return order.created_at.toDate();
+    } else if (order.created_at?.seconds) {
+      return new Date(order.created_at.seconds * 1000);
+    } else {
+      return new Date(order.created_at);
+    }
+  };
+
+  const filterOrders = (allOrders: OrderData[], filter: TimeFilter, startDate?: string, endDate?: string) => {
     if (filter === 'all') {
       return allOrders;
     }
@@ -26,15 +40,17 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
     startOfWeek.setDate(now.getDate() - now.getDay());
     startOfWeek.setHours(0, 0, 0, 0);
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfYear = new Date(now.getFullYear(), 0, 1);
 
     return allOrders.filter(order => {
-      let orderDate: Date;
-      if (order.created_at?.toDate) {
-        orderDate = order.created_at.toDate();
-      } else if (order.created_at?.seconds) {
-        orderDate = new Date(order.created_at.seconds * 1000);
-      } else {
-        orderDate = new Date(order.created_at);
+      const orderDate = getOrderDate(order);
+
+      if (filter === 'custom' && startDate && endDate) {
+        const start = new Date(startDate);
+        start.setHours(0, 0, 0, 0);
+        const end = new Date(endDate);
+        end.setHours(23, 59, 59, 999);
+        return orderDate >= start && orderDate <= end;
       }
 
       switch (filter) {
@@ -44,6 +60,8 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
           return orderDate >= startOfWeek;
         case 'month':
           return orderDate >= startOfMonth;
+        case 'year':
+          return orderDate >= startOfYear;
         default:
           return true;
       }
@@ -57,7 +75,17 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
     try {
       const fetchedOrders = await fetchOrders();
       setOrders(fetchedOrders);
-      setFilteredOrders(filterOrders(fetchedOrders, timeFilter));
+
+      if (fetchedOrders.length > 0) {
+        const dates = fetchedOrders.map(order => getOrderDate(order));
+        const earliest = new Date(Math.min(...dates.map(d => d.getTime())));
+        const latest = new Date(Math.max(...dates.map(d => d.getTime())));
+
+        setMinDate(earliest.toISOString().split('T')[0]);
+        setMaxDate(latest.toISOString().split('T')[0]);
+      }
+
+      setFilteredOrders(filterOrders(fetchedOrders, timeFilter, customStartDate, customEndDate));
     } catch (err) {
       setError('Failed to load orders. Please try again.');
       console.error('Error loading orders:', err);
@@ -71,8 +99,14 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
   }, []);
 
   useEffect(() => {
-    setFilteredOrders(filterOrders(orders, timeFilter));
-  }, [timeFilter, orders]);
+    setFilteredOrders(filterOrders(orders, timeFilter, customStartDate, customEndDate));
+  }, [timeFilter, orders, customStartDate, customEndDate]);
+
+  const handleCustomDateApply = () => {
+    if (customStartDate && customEndDate) {
+      setTimeFilter('custom');
+    }
+  };
 
   const formatDate = (timestamp: any) => {
     if (!timestamp) return 'N/A';
@@ -165,14 +199,72 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
             >
               This Month
             </button>
+            <button
+              onClick={() => setTimeFilter('year')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                timeFilter === 'year'
+                  ? 'bg-orange-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              This Year
+            </button>
           </div>
-          <div className="flex justify-between items-center">
-            <p className="text-lg font-semibold text-gray-900">
-              Orders: <span className="text-orange-600">{filteredOrders.length}</span>
-            </p>
-            <p className="text-lg font-semibold text-gray-900">
-              Total Revenue: <span className="text-orange-600">{totalAmount.toFixed(2).replace('.', ',')} €</span>
-            </p>
+
+          <div className="border-t pt-4 mt-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Calendar className="w-5 h-5 text-orange-600" />
+              <h3 className="font-semibold text-gray-900">Custom Date Range</h3>
+            </div>
+            <div className="flex flex-wrap gap-3 items-end">
+              <div className="flex-1 min-w-[200px]">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                <input
+                  type="date"
+                  value={customStartDate}
+                  onChange={(e) => setCustomStartDate(e.target.value)}
+                  min={minDate}
+                  max={maxDate}
+                  disabled={!minDate || !maxDate}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                />
+              </div>
+              <div className="flex-1 min-w-[200px]">
+                <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                <input
+                  type="date"
+                  value={customEndDate}
+                  onChange={(e) => setCustomEndDate(e.target.value)}
+                  min={customStartDate || minDate}
+                  max={maxDate}
+                  disabled={!minDate || !maxDate}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                />
+              </div>
+              <button
+                onClick={handleCustomDateApply}
+                disabled={!customStartDate || !customEndDate}
+                className="px-6 py-2 rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed font-medium"
+              >
+                Apply
+              </button>
+            </div>
+            {minDate && maxDate && (
+              <p className="text-xs text-gray-500 mt-2">
+                Available date range: {new Date(minDate).toLocaleDateString('de-DE')} - {new Date(maxDate).toLocaleDateString('de-DE')}
+              </p>
+            )}
+          </div>
+
+          <div className="border-t pt-4 mt-4">
+            <div className="flex justify-between items-center">
+              <p className="text-lg font-semibold text-gray-900">
+                Orders: <span className="text-orange-600">{filteredOrders.length}</span>
+              </p>
+              <p className="text-lg font-semibold text-gray-900">
+                Total Revenue: <span className="text-orange-600">{totalAmount.toFixed(2).replace('.', ',')} €</span>
+              </p>
+            </div>
           </div>
         </div>
 
