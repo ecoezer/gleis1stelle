@@ -139,7 +139,7 @@ const Navigation = () => {
           {/* Navigation Items */}
           <div
             ref={scrollContainerRef}
-            className="flex items-center justify-start gap-2 overflow-x-auto scrollbar-hide flex-1 lg:justify-center px-2"
+            className="flex items-center justify-start gap-2 overflow-x-auto scrollbar-hide flex-1 px-2"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
