@@ -34,7 +34,8 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
     const needsConfig = item.sizes || item.isWunschPizza || item.isPizza || item.isPasta ||
                         item.isBeerSelection || item.isMeatSelection || (item.isSpezialitaet && ![81, 82, 580, 581, 582, 583].includes(item.id) && !item.isMeatSelection) ||
                         (item.id >= 564 && item.id <= 568 && item.isSpezialitaet) ||
-                        [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57].includes(item.number);
+                        [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57].includes(item.number) ||
+                        [593, 594].includes(item.id); // Alcoholic drinks need age confirmation
     needsConfig ? setSelectedItem(item) : onAddToOrder(item);
   }, [onAddToOrder]);
 

@@ -350,6 +350,35 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
         </div>
 
         <div className="p-6 space-y-6">
+          {/* Age Restriction Warning for Alcoholic Drinks */}
+          {[593, 594].includes(item.id) && (
+            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-gray-800 font-medium">
+                    Dies ist ein Artikel mit Altersbeschränkung.
+                  </p>
+                  <p className="text-gray-700 mt-1">
+                    Dein/e Fahrer:in wird deinen gültigen Lichtbildausweis überprüfen.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Price Display for Alcoholic Items */}
+          {[593, 594].includes(item.id) && (
+            <div>
+              <div className="text-2xl font-bold text-gray-900 mb-2">
+                {item.price.toFixed(2).replace('.', ',')} €
+              </div>
+              <div className="text-sm text-gray-600">
+                <p className="font-medium text-gray-900 mb-1">Produktinfo</p>
+                <p>zzgl. Pfand (0,08 €) 4,8% vol, 0,33l, {(item.price / 0.33).toFixed(2).replace('.', ',')} €/1l</p>
+              </div>
+            </div>
+          )}
 
           {/* Step indicator for meat selection items */}
           {item.isMeatSelection && (
