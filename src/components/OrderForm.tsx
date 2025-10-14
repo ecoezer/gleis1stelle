@@ -756,7 +756,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
             </label>
             <div className="space-y-3">
               <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-xl border-2 transition-all hover:bg-orange-50"
-                     style={{ 
+                     style={{
                        backgroundColor: watchDeliveryTime === 'asap' ? '#fff7ed' : '#fefbf7',
                        borderColor: watchDeliveryTime === 'asap' ? '#fb923c' : '#fed7aa'
                      }}>
@@ -769,7 +769,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
                 <span className="text-sm font-medium">⚡ So schnell wie möglich</span>
               </label>
               <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-xl border-2 transition-all hover:bg-orange-50"
-                     style={{ 
+                     style={{
                        backgroundColor: watchDeliveryTime === 'specific' ? '#fff7ed' : '#fefbf7',
                        borderColor: watchDeliveryTime === 'specific' ? '#fb923c' : '#fed7aa'
                      }}>
@@ -782,15 +782,49 @@ const OrderForm: React.FC<OrderFormProps> = ({
                 <span className="text-sm font-medium">🕐 Zu bestimmter Zeit</span>
               </label>
             </div>
-            
+
             {watchDeliveryTime === 'specific' && (
-              <input
-                type="time"
-                {...register('specificTime')}
-                className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
-                min="12:00"
-                max="21:30"
-              />
+              <div className="space-y-2">
+                <select
+                  {...register('specificTime')}
+                  className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
+                >
+                  <option value="">Bitte wählen...</option>
+                  {(() => {
+                    const times = [];
+                    const now = new Date();
+                    const minTime = new Date(now.getTime() + 20 * 60 * 1000);
+
+                    let minutes = Math.ceil(minTime.getMinutes() / 5) * 5;
+                    let hours = minTime.getHours();
+
+                    if (minutes >= 60) {
+                      minutes = 0;
+                      hours++;
+                    }
+
+                    const startMinutes = hours * 60 + minutes;
+                    const endMinutes = 21 * 60 + 30;
+
+                    for (let totalMinutes = startMinutes; totalMinutes <= endMinutes; totalMinutes += 5) {
+                      const h = Math.floor(totalMinutes / 60);
+                      const m = totalMinutes % 60;
+
+                      if (h < 12 || h > 21 || (h === 21 && m > 30)) continue;
+
+                      const timeStr = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+                      times.push(timeStr);
+                    }
+
+                    return times.map(time => (
+                      <option key={time} value={time}>{time} Uhr</option>
+                    ));
+                  })()}
+                </select>
+                <p className="text-xs text-gray-600">
+                  Bestellungen können mindestens 20 Minuten im Voraus aufgegeben werden
+                </p>
+              </div>
             )}
             {errors.specificTime && (
               <p className="text-sm text-red-600 flex items-center gap-1">
