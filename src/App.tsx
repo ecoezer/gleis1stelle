@@ -47,7 +47,8 @@ const MENU_SECTIONS = [
   { id: 'pide', title: 'Pide', description: 'Alle Pides werden mit Gouda-Käse zubereitet', items: pide },
   { id: 'croques', title: 'Hamburger', description: 'Alle Burger werden mit frischem Salat, Ketchup sowie Burger-Dressing serviert', items: croques },
   { id: 'schnitzel', title: 'Schnitzel', description: 'Knusprige Schnitzel mit Beilagen', items: schnitzel },
-  { id: 'salate', title: 'Salate', description: 'Frische Salate', items: salads },
+  { id: 'salate', title: 'Salate', description: 'Alle Salate werden mit einem Dressing Ihrer Wahl zubereitet
+(z. B. Joghurt-, Balsamico- oder Essig-Öl-Dressing)', items: salads },
   { id: 'dips', title: 'Dips & Soßen', description: 'Leckere Dips und Soßen', items: dips },
   { id: 'getraenke', title: 'Getränke', description: 'Erfrischende Getränke', items: drinks }
 ];
