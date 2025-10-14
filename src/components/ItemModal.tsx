@@ -43,6 +43,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
   const [currentStep, setCurrentStep] = useState<'meat' | 'sauce' | 'exclusions' | 'sidedish' | 'complete'>('meat');
   const [showAllSauces, setShowAllSauces] = useState(false);
   const [showAllExclusions, setShowAllExclusions] = useState(false);
+  const [showAgeWarning, setShowAgeWarning] = useState(false);
 
   const handleIngredientToggle = useCallback((ingredient: string) => {
     setSelectedIngredients(prev => {
@@ -117,6 +118,12 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
       return;
     }
 
+    // Show age warning popup for alcoholic items
+    if ([593, 594].includes(item.id) && !showAgeWarning) {
+      setShowAgeWarning(true);
+      return;
+    }
+
     onAddToOrder(
       item,
       selectedSize,
@@ -128,7 +135,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
       selectedSideDish || undefined
     );
     onClose();
-  }, [item, selectedSize, selectedIngredients, selectedExtras, selectedPastaType, selectedSauce, selectedSauces, selectedMeatType, selectedExclusions, selectedSideDish, onAddToOrder, onClose, currentStep]);
+  }, [item, selectedSize, selectedIngredients, selectedExtras, selectedPastaType, selectedSauce, selectedSauces, selectedMeatType, selectedExclusions, selectedSideDish, onAddToOrder, onClose, currentStep, showAgeWarning]);
 
   const getSauceOptions = useCallback(() => {
     // Drehspieß items use special sauce types
@@ -213,6 +220,76 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
 
   if (!isOpen) return null;
 
+  // Age verification warning modal
+  if (showAgeWarning) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl max-w-md w-full">
+          <div className="p-6 space-y-4">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="w-8 h-8 text-yellow-600 flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <h2 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  {item.name}
+                  <span className="text-xs font-bold px-2 py-0.5 rounded bg-gray-900 text-white">
+                    18+
+                  </span>
+                </h2>
+                <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 mb-4">
+                  <p className="text-gray-800 font-medium">
+                    Dies ist ein Artikel mit Altersbeschränkung.
+                  </p>
+                  <p className="text-gray-700 mt-2">
+                    Dein/e Fahrer:in wird deinen gültigen Lichtbildausweis überprüfen.
+                  </p>
+                </div>
+                <div className="text-lg font-bold text-gray-900 mb-4">
+                  {item.price.toFixed(2).replace('.', ',')} €
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Produktinfo</p>
+                <p className="text-sm text-gray-700">
+                  {item.description ? item.description : `zzgl. Pfand (0,08 €) 4,8% vol, 0,33l, ${(item.price / 0.33).toFixed(2).replace('.', ',')} €/1l`}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 pt-4">
+              <button
+                onClick={() => {
+                  setShowAgeWarning(false);
+                  onClose();
+                }}
+                className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-semibold transition-colors border border-gray-300"
+              >
+                Abbrechen
+              </button>
+              <button
+                onClick={() => {
+                  onAddToOrder(
+                    item,
+                    selectedSize,
+                    selectedIngredients,
+                    selectedExtras,
+                    selectedPastaType || undefined,
+                    (selectedSauces.length > 0 ? selectedSauces.join(', ') : selectedSauce) || selectedMeatType || undefined,
+                    selectedExclusions,
+                    selectedSideDish || undefined
+                  );
+                  setShowAgeWarning(false);
+                  onClose();
+                }}
+                className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+              >
+                Hinzufügen
+                <span className="font-bold">{item.price.toFixed(2).replace('.', ',')} €</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-xl max-w-lg w-full max-h-[85vh] overflow-y-auto">
@@ -268,29 +345,6 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
         </div>
 
         <div className="p-6 space-y-6">
-          {/* Age Restriction Warning for Alcoholic Drinks */}
-          {[593, 594].includes(item.id) && (
-            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
-              <div className="flex items-start gap-3">
-                <AlertTriangle className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-gray-800 font-medium">
-                    Dies ist ein Artikel mit Altersbeschränkung.
-                  </p>
-                  <p className="text-gray-700 mt-1">
-                    Dein/e Fahrer:in wird deinen gültigen Lichtbildausweis überprüfen.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Price Display for Simple Items */}
-          {[593, 594].includes(item.id) && (
-            <div className="text-2xl font-bold text-gray-900">
-              {item.price.toFixed(2).replace('.', ',')} €
-            </div>
-          )}
 
           {/* Step indicator for meat selection items */}
           {item.isMeatSelection && (
