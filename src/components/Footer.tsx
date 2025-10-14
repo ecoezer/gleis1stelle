@@ -44,7 +44,7 @@ const Footer = () => {
           </div>
           <div className="font-bold text-gray-800 text-sm">🏠 BAHNHOFSTRASSE 39</div>
           <div className="text-xs text-gray-600">📮 21435 STELLE (ASHAUSEN)</div>
-          <p className="text-xs text-gray-500">🚗 Gleis1 Pizza & Döner Lieferservice</p>
+          <p className="text-xs text-gray-500">🚗 Gleis1 Döner & Pizza Lieferservice</p>
         </div>
 
         {/* WhatsApp Button */}
@@ -82,7 +82,7 @@ const Footer = () => {
             🍽️ Leckere Döner, Pizza & mehr in Stelle
           </div>
           <p className="text-xs text-gray-500">
-            © 2025 Gleis1 Pizza & Döner 🚕 - Alle Rechte vorbehalten
+            © 2025 Gleis1 Döner & Pizza 🚕 - Alle Rechte vorbehalten
           </p>
         </div>
       </div>

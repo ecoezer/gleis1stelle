@@ -3,7 +3,6 @@ import { ChevronLeft, ChevronRight, Menu } from 'lucide-react';
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('fleischgerichte');
-  const [isMobile, setIsMobile] = useState(false);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -22,17 +21,6 @@ const Navigation = () => {
     ['alkoholfreie-getraenke', 'Alkoholfreie Getränke'],
     ['alkoholische-getraenke', 'Alkoholische Getränke']
   ];
-
-  // Mobile detection
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Check scroll position and update arrow visibility
   const updateArrowVisibility = () => {
@@ -134,9 +122,9 @@ const Navigation = () => {
     <div className="w-full bg-white border-b border-gray-200 sticky top-0 z-50 lg:pr-80">
       <div className="max-w-7xl mx-auto px-4 lg:pr-0 lg:max-w-none">
         <div className="flex items-center h-16">
-          
+
           {/* Left Arrow */}
-          {isMobile && showLeftArrow && (
+          {showLeftArrow && (
             <div className="flex-shrink-0 pr-2">
               <button
                 onClick={() => scroll('left')}
@@ -149,11 +137,11 @@ const Navigation = () => {
           )}
 
           {/* Navigation Items */}
-          <div 
+          <div
             ref={scrollContainerRef}
             className="flex items-center justify-start gap-2 overflow-x-auto scrollbar-hide flex-1 lg:justify-center px-2"
-            style={{ 
-              scrollbarWidth: 'none', 
+            style={{
+              scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               scrollSnapType: 'x mandatory'
             }}
@@ -189,7 +177,7 @@ const Navigation = () => {
           </div>
 
           {/* Right Arrow */}
-          {isMobile && showRightArrow && (
+          {showRightArrow && (
             <div className="flex-shrink-0 pl-2">
               <button
                 onClick={() => scroll('right')}
