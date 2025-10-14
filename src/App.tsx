@@ -14,6 +14,7 @@ import {
   snacks,
   vegetarischeGerichte,
   croques,
+  pizzabroetchen,
 } from './data/menuItems';
 import { useCartStore } from './store/cart.store';
 import { ShoppingCart, ChevronUp, ChevronDown, X } from 'lucide-react';
@@ -40,6 +41,7 @@ const MENU_SECTIONS = [
   { id: 'snacks', title: 'Snacks', description: 'Kleine Gerichte und Menüs', items: snacks },
   { id: 'vegetarische-gerichte', title: 'Vegetarische Gerichte', description: 'Fleischlose Alternativen', items: vegetarischeGerichte },
   { id: 'pizza', title: 'Pizza', description: 'Frisch gebackene Pizzen', items: pizzas },
+  { id: 'pizzabroetchen', title: 'Pizzabrötchen', description: 'Sauce nach Wahl: Joghurt, Kräuterremoulade, Chilicheese, Cocktail, Aioli oder Tzatziki', items: pizzabroetchen },
   { id: 'croques', title: 'Hamburger', description: 'Alle Burger werden mit frischem Salat, Ketchup sowie Burger-Dressing serviert', items: croques },
   { id: 'salate', title: 'Salate', description: 'Frische Salate', items: salads },
   { id: 'dips', title: 'Dips & Soßen', description: 'Leckere Dips und Soßen', items: dips },
@@ -135,6 +137,7 @@ function App() {
       ...snacks,
       ...vegetarischeGerichte,
       ...pizzas,
+      ...pizzabroetchen,
       ...croques,
       ...salads,
       ...dips,

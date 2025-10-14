@@ -3,7 +3,7 @@ import { X, Plus, ShoppingCart } from 'lucide-react';
 import { MenuItem, PizzaSize } from '../types';
 import {
   wunschPizzaIngredients, pizzaExtras, pastaTypes,
-  sauceTypes, saladSauceTypes, pommesSauceTypes, beerTypes, meatTypes, saladExclusionOptions, sideDishOptions, drehspiessaSauceTypes, snackSauceTypes
+  sauceTypes, saladSauceTypes, pommesSauceTypes, beerTypes, meatTypes, saladExclusionOptions, sideDishOptions, drehspiessaSauceTypes, snackSauceTypes, pizzabroetchenSauceTypes
 } from '../data/menuItems';
 
 interface ItemModalProps {
@@ -139,6 +139,10 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
     if ([74, 75, 76, 77, 78, 79].includes(item.number)) {
       return drehspiessaSauceTypes;
     }
+    // Pizzabrötchen items (50-57) use pizzabrötchen sauce types
+    if ([50, 51, 52, 53, 54, 55, 56, 57].includes(item.number)) {
+      return pizzabroetchenSauceTypes;
+    }
     // Snack items (16-20) use snack sauce types
     if ([16, 17, 18, 19, 20].includes(item.number)) {
       return snackSauceTypes;
@@ -154,7 +158,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
 
   const getVisibleSauceOptions = useCallback(() => {
     const allSauces = getSauceOptions();
-    if ((item.isMeatSelection && currentStep === 'sauce') || [6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number)) {
+    if ((item.isMeatSelection && currentStep === 'sauce') || [6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57, 74, 75, 76, 77, 78, 79].includes(item.number)) {
       return showAllSauces ? allSauces : allSauces.slice(0, 3);
     }
     return allSauces;
@@ -454,14 +458,14 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {((item.isSpezialitaet && ![81, 82, 562, 563, 564, 565, 566].includes(item.id) && !item.isMeatSelection) ||
             (item.id >= 568 && item.id <= 573 && item.isSpezialitaet) ||
             (item.isMeatSelection && currentStep === 'sauce') ||
-            [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number)) && (
+            [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57, 74, 75, 76, 77, 78, 79].includes(item.number)) && (
             <div>
               <h3 className="font-semibold text-gray-900 mb-3">
-                {item.id >= 568 && item.id <= 573 ? 'Dressing wählen' : ((item.isMeatSelection && currentStep === 'sauce') || [74, 75, 76, 77, 78, 79].includes(item.number) ? 'Soßen wählen (max. 3)' : [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].includes(item.number) ? 'Soßen wählen (mehrere möglich)' : 'Soße wählen')}
-                {!item.isMeatSelection && ![8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number) && ((item.isSpezialitaet && ![81, 82].includes(item.id)) || (item.id >= 568 && item.id <= 573)) ? ' *' : ''}
+                {item.id >= 568 && item.id <= 573 ? 'Dressing wählen' : ((item.isMeatSelection && currentStep === 'sauce') || [74, 75, 76, 77, 78, 79].includes(item.number) ? 'Soßen wählen (max. 3)' : [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57].includes(item.number) ? 'Soße wählen' : 'Soße wählen')}
+                {!item.isMeatSelection && ![8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57, 74, 75, 76, 77, 78, 79].includes(item.number) && ((item.isSpezialitaet && ![81, 82].includes(item.id)) || (item.id >= 568 && item.id <= 573)) ? ' *' : ''}
               </h3>
 
-              {(item.isMeatSelection && currentStep === 'sauce') || [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number) ? (
+              {(item.isMeatSelection && currentStep === 'sauce') || [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57, 74, 75, 76, 77, 78, 79].includes(item.number) ? (
                 // Multiple selection for meat selection items in step 2 and snack items
                 <div className="space-y-2">
                   {getVisibleSauceOptions().map((sauce) => {
@@ -516,7 +520,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
               )}
               
               {/* Show More/Less Button for Sauce Selection in Step 2 and Sucuk items */}
-              {((item.isMeatSelection && currentStep === 'sauce') || [6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 74, 75, 76, 77, 78, 79].includes(item.number)) && getSauceOptions().length > 3 && (
+              {((item.isMeatSelection && currentStep === 'sauce') || [6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57, 74, 75, 76, 77, 78, 79].includes(item.number)) && getSauceOptions().length > 3 && (
                 <div className="mt-4 text-center">
                   <button
                     type="button"

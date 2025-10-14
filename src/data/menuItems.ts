@@ -32,6 +32,9 @@ export const drehspiessaSauceTypes = ['Cocktail-Soße', 'scharfe Soße', 'Tzatzi
 // Snack sauce options (same as Drehspieß + Ketchup & Mayo)
 export const snackSauceTypes = ['Cocktail-Soße', 'scharfe Soße', 'Tzatziki', 'Ketchup', 'Mayonnaise', 'ohne Soße'] as const;
 
+// Pizzabrötchen sauce options
+export const pizzabroetchenSauceTypes = ['Joghurt', 'Kräuterremoulade', 'Chilicheese', 'Cocktail', 'Aioli', 'Tzatziki'] as const;
+
 // Salad exclusion options for Drehspieß items
 export const saladExclusionOptions = [
   'ohne Eisbergsalat',
@@ -71,6 +74,18 @@ export const vegetarischeGerichte: readonly MenuItem[] = [
   { id: 577, number: 77, name: "Falafel Teller", description: "mit Falafel, Pommes frites, frischem Salat und Sauce nach Wahl", price: 9.00, isSpezialitaet: true, allergens: "Aa, E, G" },
   { id: 578, number: 78, name: "Falafel Box", description: "mit Falafel, Pommes frites, frischem Salat und Sauce nach Wahl", price: 8.00, isSpezialitaet: true, allergens: "Aa, E, G" },
   { id: 579, number: 79, name: "Halloumi Tasche", description: "mit Halloumi, frischem Salat und Sauce nach Wahl", price: 7.50, isSpezialitaet: true, allergens: "Aa, I" }
+];
+
+// Pizzabrötchen
+export const pizzabroetchen: readonly MenuItem[] = [
+  { id: 550, number: 50, name: "Pizzabrötchen Classic", description: "", price: 7.00, allergens: "Aa, I" },
+  { id: 551, number: 51, name: "Pizzabrötchen mit Käse", description: "", price: 8.00, allergens: "Aa, I" },
+  { id: 552, number: 52, name: "Pizzabrötchen mit Thunfisch", description: "", price: 8.50, allergens: "Aa, F, I" },
+  { id: 553, number: 53, name: "Pizzabrötchen mit Salami", description: "", price: 8.00, allergens: "Aa, B, I, G, 6, 9, 9.I" },
+  { id: 554, number: 54, name: "Pizzabrötchen mit Schinken", description: "", price: 9.00, allergens: "Aa, B, I, G, 6, 9, 9.I, 17" },
+  { id: 555, number: 55, name: "Pizzabrötchen mit Sucuk", description: "", price: 9.50, allergens: "Aa, B, G, I, M, 3, 6, 9, 14, 17, 18" },
+  { id: 556, number: 56, name: "Pizzabrötchen mit Spinat", description: "", price: 9.50, allergens: "Aa, I" },
+  { id: 557, number: 57, name: "Pizzabrötchen mit Kebab", description: "", price: 9.50, allergens: "Aa, G, I, M, 14, 17, 18" }
 ];
 
 // Hamburger
