@@ -33,7 +33,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
   );
   const [selectedSauce, setSelectedSauce] = useState<string>('');
   const [selectedMeatType, setSelectedMeatType] = useState<string>(
-    item.isMeatSelection ? meatTypes[0] : ''
+    item.isMeatSelection ? 'Kalbfleisch' : ''
   );
   const [selectedSauces, setSelectedSauces] = useState<string[]>([]);
   const [selectedExclusions, setSelectedExclusions] = useState<string[]>([]);
