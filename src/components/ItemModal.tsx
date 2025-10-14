@@ -423,11 +423,11 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
         <div className="p-6 space-y-6">
           {/* Allergen Information Banner */}
           {item.allergens && allergenList.length > 0 && (
-            <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
-              <div className="flex items-start gap-3">
-                <Info className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-2">
+              <div className="flex items-start gap-2">
+                <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
-                  <p className="text-gray-800 font-medium mb-1">
+                  <p className="text-gray-800 font-medium mb-0.5 text-sm">
                     Allergene: {item.allergens}
                   </p>
                   <button
