@@ -5,7 +5,7 @@ interface SimpleAdminLoginProps {
   onLoginSuccess: () => void;
 }
 
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_PASSWORD = 'Zb^73ZnP9T%Hr!';
 
 const SimpleAdminLogin: React.FC<SimpleAdminLoginProps> = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState('');
@@ -72,7 +72,7 @@ const SimpleAdminLogin: React.FC<SimpleAdminLoginProps> = ({ onLoginSuccess }) =
 
         <div className="mt-6 pt-6 border-t border-gray-200 text-center">
           <p className="text-xs text-gray-500">
-            Default password: admin123
+            Secure admin access
           </p>
         </div>
       </div>
