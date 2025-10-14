@@ -9,6 +9,8 @@ import {
   salads,
   dips,
   drinks,
+  alkoholfreieGetraenke,
+  alkoholischeGetraenke,
   fleischgerichte,
   pizzas,
   snacks,
@@ -49,7 +51,8 @@ const MENU_SECTIONS = [
   { id: 'schnitzel', title: 'Schnitzel', description: 'Knusprige Schnitzel mit Beilagen', items: schnitzel },
   { id: 'salate', title: 'Salate', description: 'Alle Salate werden mit einem Dressing Ihrer Wahl zubereitet (z. B. Joghurt-, Balsamico- oder Essig-Öl-Dressing)', items: salads },
   { id: 'dips', title: 'Dips & Soßen', description: 'Leckere Dips und Soßen', items: dips },
-  { id: 'getraenke', title: 'Getränke', description: 'Erfrischende Getränke', items: drinks }
+  { id: 'alkoholfreie-getraenke', title: 'Alkoholfreie Getränke', description: 'Erfrischende alkoholfreie Getränke', items: alkoholfreieGetraenke },
+  { id: 'alkoholische-getraenke', title: 'Alkoholische Getränke', description: 'Biere', items: alkoholischeGetraenke }
 ];
 
 function App() {
@@ -147,7 +150,8 @@ function App() {
       ...schnitzel,
       ...salads,
       ...dips,
-      ...drinks
+      ...alkoholfreieGetraenke,
+      ...alkoholischeGetraenke
     ];
     return filterItems(allItems).length > 0;
   }, [searchQuery, filterItems]);

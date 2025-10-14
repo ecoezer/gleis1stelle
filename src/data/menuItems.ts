@@ -147,8 +147,8 @@ export const dips: readonly MenuItem[] = [
   { id: 574, number: 74, name: "Mayonnaise", description: "", price: 1.00 }
 ];
 
-// Drinks
-export const drinks: readonly MenuItem[] = [
+// Alkoholfreie Getränke
+export const alkoholfreieGetraenke: readonly MenuItem[] = [
   { id: 580, number: 80, name: "Coca Cola", description: "0,33l", price: 2.00, allergens: "3, 4, 18" },
   { id: 581, number: 81, name: "Coca Cola Zero", description: "0,33l", price: 2.00, allergens: "1, 3, 4, 13, 18" },
   { id: 582, number: 82, name: "Fanta", description: "0,33l", price: 2.00, allergens: "3, 6, 17, 18" },
@@ -161,9 +161,19 @@ export const drinks: readonly MenuItem[] = [
   { id: 589, number: 89, name: "Coca Cola Zero", description: "1,0l", price: 3.20, allergens: "1, 3, 4, 13, 18" },
   { id: 590, number: 90, name: "Fanta", description: "1,0l", price: 3.20, allergens: "3, 6, 17, 18" },
   { id: 591, number: 91, name: "Sprite", description: "1,0l", price: 3.20, allergens: "18" },
-  { id: 592, number: 92, name: "Mezzo Mix", description: "1,0l", price: 3.20, allergens: "3, 4, 17, 18" },
+  { id: 592, number: 92, name: "Mezzo Mix", description: "1,0l", price: 3.20, allergens: "3, 4, 17, 18" }
+];
+
+// Alkoholische Getränke
+export const alkoholischeGetraenke: readonly MenuItem[] = [
   { id: 593, number: 93, name: "Becks Pils", description: "0,33l", price: 2.50, allergens: "Aa" },
   { id: 594, number: 94, name: "Einbecker Pils", description: "0,33l", price: 2.50, allergens: "Aa" }
+];
+
+// Drinks (kept for backward compatibility)
+export const drinks: readonly MenuItem[] = [
+  ...alkoholfreieGetraenke,
+  ...alkoholischeGetraenke
 ];
 
 // Drehspieß (Meat dishes)

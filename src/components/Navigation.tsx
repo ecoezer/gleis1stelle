@@ -19,7 +19,8 @@ const Navigation = () => {
     ['schnitzel', 'Schnitzel'],
     ['salate', 'Salate'],
     ['dips', 'Dips & Soßen'],
-    ['getraenke', 'Getränke']
+    ['alkoholfreie-getraenke', 'Alkoholfreie Getränke'],
+    ['alkoholische-getraenke', 'Alkoholische Getränke']
   ];
 
   // Mobile detection
