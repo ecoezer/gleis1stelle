@@ -130,24 +130,24 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
   const totalAmount = filteredOrders.reduce((sum, order) => sum + order.total_amount, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50">
-      <div className="bg-white shadow-lg sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <ShoppingBag className="w-6 h-6 text-orange-600" />
+    <div className="min-h-screen bg-gray-50">
+      <div className="bg-white shadow sticky top-0 z-10 border-b">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <ShoppingBag className="w-5 h-5 text-orange-600" />
             Order History
           </h1>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={loadOrders}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
               Refresh
             </button>
             <button
               onClick={onLogout}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-100 text-red-700 hover:bg-red-200 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-red-100 text-red-700 hover:bg-red-200 transition-colors"
             >
               <LogOut className="w-4 h-4" />
               Logout
@@ -156,22 +156,22 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
-          <div className="flex flex-wrap gap-2 mb-4">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="bg-white rounded-lg shadow-sm p-3 mb-4">
+          <div className="flex flex-wrap gap-1.5 mb-3">
             <button
               onClick={() => setTimeFilter('all')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-3 py-1.5 text-sm rounded-md font-medium transition-colors ${
                 timeFilter === 'all'
                   ? 'bg-orange-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              All Time
+              All
             </button>
             <button
               onClick={() => setTimeFilter('today')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-3 py-1.5 text-sm rounded-md font-medium transition-colors ${
                 timeFilter === 'today'
                   ? 'bg-orange-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -181,44 +181,44 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
             </button>
             <button
               onClick={() => setTimeFilter('week')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-3 py-1.5 text-sm rounded-md font-medium transition-colors ${
                 timeFilter === 'week'
                   ? 'bg-orange-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              This Week
+              Week
             </button>
             <button
               onClick={() => setTimeFilter('month')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-3 py-1.5 text-sm rounded-md font-medium transition-colors ${
                 timeFilter === 'month'
                   ? 'bg-orange-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              This Month
+              Month
             </button>
             <button
               onClick={() => setTimeFilter('year')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-3 py-1.5 text-sm rounded-md font-medium transition-colors ${
                 timeFilter === 'year'
                   ? 'bg-orange-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              This Year
+              Year
             </button>
           </div>
 
-          <div className="border-t pt-4 mt-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Calendar className="w-5 h-5 text-orange-600" />
-              <h3 className="font-semibold text-gray-900">Custom Date Range</h3>
+          <div className="border-t pt-3 mt-3">
+            <div className="flex items-center gap-1.5 mb-2">
+              <Calendar className="w-4 h-4 text-orange-600" />
+              <h3 className="text-sm font-semibold text-gray-900">Custom Range</h3>
             </div>
-            <div className="flex flex-wrap gap-3 items-end">
-              <div className="flex-1 min-w-[200px]">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+            <div className="flex flex-wrap gap-2 items-end">
+              <div className="flex-1 min-w-[140px]">
+                <label className="block text-xs font-medium text-gray-700 mb-1">Start</label>
                 <input
                   type="date"
                   value={customStartDate}
@@ -226,11 +226,11 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
                   min={minDate}
                   max={maxDate}
                   disabled={!minDate || !maxDate}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
-              <div className="flex-1 min-w-[200px]">
-                <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+              <div className="flex-1 min-w-[140px]">
+                <label className="block text-xs font-medium text-gray-700 mb-1">End</label>
                 <input
                   type="date"
                   value={customEndDate}
@@ -238,169 +238,146 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
                   min={customStartDate || minDate}
                   max={maxDate}
                   disabled={!minDate || !maxDate}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
               <button
                 onClick={handleCustomDateApply}
                 disabled={!customStartDate || !customEndDate}
-                className="px-6 py-2 rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed font-medium"
+                className="px-4 py-1.5 text-sm rounded-md bg-orange-600 text-white hover:bg-orange-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed font-medium"
               >
                 Apply
               </button>
             </div>
-            {minDate && maxDate && (
-              <p className="text-xs text-gray-500 mt-2">
-                Available date range: {new Date(minDate).toLocaleDateString('de-DE')} - {new Date(maxDate).toLocaleDateString('de-DE')}
-              </p>
-            )}
           </div>
 
-          <div className="border-t pt-4 mt-4">
-            <div className="flex justify-between items-center">
-              <p className="text-lg font-semibold text-gray-900">
+          <div className="border-t pt-3 mt-3">
+            <div className="flex justify-between items-center text-sm">
+              <p className="font-semibold text-gray-900">
                 Orders: <span className="text-orange-600">{filteredOrders.length}</span>
               </p>
-              <p className="text-lg font-semibold text-gray-900">
-                Total Revenue: <span className="text-orange-600">{totalAmount.toFixed(2).replace('.', ',')} €</span>
+              <p className="font-semibold text-gray-900">
+                Revenue: <span className="text-orange-600">{totalAmount.toFixed(2).replace('.', ',')} €</span>
               </p>
             </div>
           </div>
         </div>
 
         {isLoading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+          <div className="flex items-center justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
           </div>
         ) : error ? (
-          <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center">
-            <p className="text-red-700">{error}</p>
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+            <p className="text-sm text-red-700">{error}</p>
           </div>
         ) : filteredOrders.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <ShoppingBag className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">No orders found</h2>
-            <p className="text-gray-600">No orders match the selected time filter.</p>
+          <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+            <ShoppingBag className="w-12 h-12 mx-auto text-gray-300 mb-2" />
+            <p className="text-sm text-gray-600">No orders found</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {filteredOrders.map((order) => (
-              <div key={order.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                      <Clock className="w-4 h-4" />
-                      {formatDate(order.created_at)}
+              <div key={order.id} className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                        <Clock className="w-3.5 h-3.5" />
+                        {formatDate(order.created_at)}
+                      </div>
+                      <div className="text-sm font-bold text-orange-600">
+                        {order.total_amount.toFixed(2).replace('.', ',')} €
+                      </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Package className="w-5 h-5 text-orange-600" />
-                        <span className="font-semibold text-gray-900">{order.customer_name}</span>
+                    <div className="space-y-1.5">
+                      <div className="flex items-center gap-1.5">
+                        <Package className="w-4 h-4 text-orange-600" />
+                        <span className="font-semibold text-sm text-gray-900">{order.customer_name}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-700">
-                        <Phone className="w-4 h-4" />
+                      <div className="flex items-center gap-1.5 text-sm text-gray-700">
+                        <Phone className="w-3.5 h-3.5" />
                         <a href={`tel:${order.customer_phone}`} className="hover:text-orange-600">
                           {order.customer_phone}
                         </a>
                       </div>
-                      <div className="flex items-start gap-2 text-gray-700">
-                        <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-                        <span>{order.delivery_address}</span>
+                      <div className="flex items-start gap-1.5 text-sm text-gray-700">
+                        <MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
+                        <span className="line-clamp-2">{order.delivery_address}</span>
                       </div>
                     </div>
 
                     {(order.device_type || order.ip_address || order.browser_info) && (
-                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 space-y-2">
-                        <p className="text-sm font-medium text-gray-900">Device Information</p>
+                      <div className="bg-gray-50 rounded px-2 py-1.5 space-y-1">
                         {order.device_type && (
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="flex items-center gap-1.5 text-xs text-gray-600">
                             {order.device_type === 'Mobile' || order.device_type === 'Tablet' ? (
-                              <Smartphone className="w-4 h-4 text-blue-600" />
+                              <Smartphone className="w-3 h-3" />
                             ) : (
-                              <Monitor className="w-4 h-4 text-blue-600" />
+                              <Monitor className="w-3 h-3" />
                             )}
                             <span>{order.device_type}</span>
                           </div>
-                        )}
-                        {order.ip_address && (
-                          <p className="text-sm text-gray-700">
-                            <span className="font-medium">IP:</span> {order.ip_address}
-                          </p>
-                        )}
-                        {order.browser_info && (
-                          <p className="text-sm text-gray-700 break-all">
-                            <span className="font-medium">Browser:</span> {order.browser_info.split(' - ')[0]}
-                          </p>
                         )}
                       </div>
                     )}
 
                     {order.notes && (
-                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-                        <p className="text-sm text-gray-700">
-                          <span className="font-medium">Notes:</span> {order.notes}
+                      <div className="bg-yellow-50 border border-yellow-200 rounded px-2 py-1.5">
+                        <p className="text-xs text-gray-700">
+                          <span className="font-medium">Note:</span> {order.notes}
                         </p>
                       </div>
                     )}
                   </div>
 
-                  <div className="space-y-4">
-                    <h3 className="font-semibold text-gray-900 text-lg border-b pb-2">Order Items</h3>
-                    <div className="space-y-3 max-h-64 overflow-y-auto">
+                  <div className="space-y-2">
+                    <div className="space-y-1.5 max-h-60 overflow-y-auto">
                       {order.items.map((item, idx) => (
-                        <div key={idx} className="bg-gray-50 rounded-lg p-3 space-y-2">
-                          <div className="flex justify-between items-start">
-                            <div className="flex-1">
-                              <p className="font-medium text-gray-900">
-                                {item.quantity}x Nr. {item.menuItemNumber} {item.name}
+                        <div key={idx} className="bg-gray-50 rounded p-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <div className="flex-1 min-w-0">
+                              <p className="font-medium text-sm text-gray-900">
+                                {item.quantity}x Nr.{item.menuItemNumber} {item.name}
                               </p>
                               {item.selectedSize && (
-                                <p className="text-sm text-gray-600">
-                                  Size: {item.selectedSize.name}
-                                  {item.selectedSize.description && ` - ${item.selectedSize.description}`}
+                                <p className="text-xs text-gray-600 truncate">
+                                  {item.selectedSize.name}
                                 </p>
                               )}
                               {item.selectedPastaType && (
-                                <p className="text-sm text-gray-600">Pasta: {item.selectedPastaType}</p>
+                                <p className="text-xs text-gray-600">Pasta: {item.selectedPastaType}</p>
                               )}
                               {item.selectedSauce && (
-                                <p className="text-sm text-gray-600">Sauce: {item.selectedSauce}</p>
+                                <p className="text-xs text-gray-600">Sauce: {item.selectedSauce}</p>
                               )}
                               {item.selectedSideDish && (
-                                <p className="text-sm text-gray-600">Side: {item.selectedSideDish}</p>
+                                <p className="text-xs text-gray-600">Side: {item.selectedSideDish}</p>
                               )}
                               {item.selectedIngredients && item.selectedIngredients.length > 0 && (
-                                <p className="text-sm text-gray-600">
-                                  Ingredients: {item.selectedIngredients.join(', ')}
+                                <p className="text-xs text-gray-600">
+                                  {item.selectedIngredients.join(', ')}
                                 </p>
                               )}
                               {item.selectedExtras && item.selectedExtras.length > 0 && (
-                                <p className="text-sm text-gray-600">Extras: {item.selectedExtras.join(', ')}</p>
+                                <p className="text-xs text-gray-600">+ {item.selectedExtras.join(', ')}</p>
                               )}
                               {item.selectedExclusions && item.selectedExclusions.length > 0 && (
-                                <p className="text-sm text-gray-600">
-                                  Exclusions: {item.selectedExclusions.join(', ')}
+                                <p className="text-xs text-gray-600">
+                                  - {item.selectedExclusions.join(', ')}
                                 </p>
                               )}
                             </div>
-                            <div className="text-right ml-4">
-                              <p className="font-semibold text-orange-600">
+                            <div className="text-right flex-shrink-0">
+                              <p className="font-semibold text-sm text-orange-600">
                                 {item.totalPrice.toFixed(2).replace('.', ',')} €
                               </p>
                             </div>
                           </div>
                         </div>
                       ))}
-                    </div>
-
-                    <div className="bg-orange-50 rounded-lg p-4 border-2 border-orange-200">
-                      <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-gray-900">Total:</span>
-                        <span className="text-2xl font-bold text-orange-600">
-                          {order.total_amount.toFixed(2).replace('.', ',')} €
-                        </span>
-                      </div>
                     </div>
                   </div>
                 </div>
