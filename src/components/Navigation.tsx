@@ -14,6 +14,7 @@ const Navigation = () => {
     ['vegetarische-gerichte', 'Vegetarische Gerichte'],
     ['pizza', 'Pizza'],
     ['pizzabroetchen', 'Pizzabrötchen'],
+    ['pide', 'Pide'],
     ['croques', 'Hamburger'],
     ['salate', 'Salate'],
     ['dips', 'Dips & Soßen'],

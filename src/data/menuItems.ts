@@ -88,6 +88,16 @@ export const pizzabroetchen: readonly MenuItem[] = [
   { id: 557, number: 57, name: "Pizzabrötchen mit Kebab", description: "", price: 9.50, allergens: "Aa, G, I, M, 14, 17, 18" }
 ];
 
+// Pide
+export const pide: readonly MenuItem[] = [
+  { id: 558, number: 58, name: "Käse Pide", description: "mit Gouda-Käse", price: 7.50, allergens: "Aa, I" },
+  { id: 559, number: 59, name: "Hackfleisch Pide", description: "mit würzigem Hackfleisch, Zwiebeln und Tomaten", price: 8.50, allergens: "Aa, I" },
+  { id: 560, number: 60, name: "Sucuk Pide", description: "mit würziger Knoblauchwurst, Zwiebeln und Tomaten", price: 8.50, allergens: "Aa, B, G, I, M, 3, 6, 9, 14, 17, 18" },
+  { id: 561, number: 61, name: "Sucuk Pide mit Ei", description: "mit würziger Knoblauchwurst und Ei oben drauf", price: 9.00, allergens: "Aa, B, G, I, K, M, 3, 6, 9, 14, 17, 18" },
+  { id: 562, number: 62, name: "Spinat Pide", description: "mit frischem Spinat und Hirtenkäse", price: 9.00, allergens: "Aa, I" },
+  { id: 563, number: 63, name: "Drehspieß Pide", description: "mit Drehspießfleisch", price: 9.00, allergens: "Aa, G, I, M, 14, 17, 18" }
+];
+
 // Hamburger
 export const croques: readonly MenuItem[] = [
   { id: 548, number: 8, name: "Crunchy Chicken Burger", description: "", price: 6.00, allergens: "Aa, I, 8.2" },
