@@ -1,44 +1,25 @@
 import React, { useState } from 'react';
 import { Lock, AlertCircle } from 'lucide-react';
 
-interface AdminLoginProps {
-  onLoginSuccess: (token: string) => void;
+interface SimpleAdminLoginProps {
+  onLoginSuccess: () => void;
 }
 
-const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
+const ADMIN_PASSWORD = 'admin123';
+
+const SimpleAdminLogin: React.FC<SimpleAdminLoginProps> = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setIsLoading(true);
 
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-auth`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ password }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.success) {
-        onLoginSuccess(data.token);
-      } else {
-        setError(data.error || 'Login failed');
-        setPassword('');
-      }
-    } catch (err) {
-      setError('Connection error. Please try again.');
-    } finally {
-      setIsLoading(false);
+    if (password === ADMIN_PASSWORD) {
+      onLoginSuccess();
+    } else {
+      setError('Invalid password');
+      setPassword('');
     }
   };
 
@@ -65,7 +46,6 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:ring-orange-500 transition-colors"
               placeholder="Enter admin password"
-              disabled={isLoading}
               autoComplete="current-password"
             />
           </div>
@@ -79,14 +59,14 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
 
           <button
             type="submit"
-            disabled={isLoading || !password}
+            disabled={!password}
             className={`w-full py-3 px-4 rounded-lg font-semibold transition-all ${
-              isLoading || !password
+              !password
                 ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 : 'bg-orange-500 hover:bg-orange-600 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02]'
             }`}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            Login
           </button>
         </form>
 
@@ -100,4 +80,4 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
   );
 };
 
-export default AdminLogin;
+export default SimpleAdminLogin;

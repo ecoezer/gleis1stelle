@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Trash2, Plus, Minus, ShoppingCart, Clock, MapPin, Phone, User, MessageSquare, Send } from 'lucide-react';
+import { saveOrder } from '../services/orderService';
 
 interface OrderItem {
   menuItem: {
@@ -272,10 +273,6 @@ const OrderForm: React.FC<OrderFormProps> = ({
     setIsSubmitting(true);
 
     try {
-      // Save order to database
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
       const deliveryAddress = data.orderType === 'delivery'
         ? `${data.street} ${data.houseNumber}, ${data.postcode}${data.deliveryZone ? ` (${DELIVERY_ZONES[data.deliveryZone as keyof typeof DELIVERY_ZONES]?.label})` : ''}`
         : 'Abholung';
@@ -309,58 +306,10 @@ const OrderForm: React.FC<OrderFormProps> = ({
       };
 
       try {
-        const response = await fetch(`${supabaseUrl}/rest/v1/orders`, {
-          method: 'POST',
-          headers: {
-            'apikey': supabaseKey,
-            'Authorization': `Bearer ${supabaseKey}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify(orderData)
-        });
-
-        if (!response.ok) {
-          console.warn('Failed to save order to database');
-        }
+        await saveOrder(orderData);
+        console.log('Order saved to Firebase successfully');
       } catch (error) {
-        console.warn('Error saving order to database:', error);
-      }
-
-      // Send email notification
-      try {
-        const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-order-email`;
-        const emailResponse = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            orderType: data.orderType,
-            deliveryZone: data.deliveryZone,
-            deliveryTime: data.deliveryTime,
-            specificTime: data.specificTime,
-            name: data.name,
-            phone: data.phone,
-            street: data.street,
-            houseNumber: data.houseNumber,
-            postcode: data.postcode,
-            note: data.note,
-            orderItems,
-            subtotal,
-            deliveryFee,
-            total
-          }),
-        });
-
-        if (emailResponse.ok) {
-          console.log('Email notification sent successfully');
-        } else {
-          console.warn('Email notification failed, but continuing with WhatsApp order');
-        }
-      } catch (error) {
-        console.warn('Email notification error:', error);
+        console.warn('Error saving order to Firebase:', error);
       }
 
       // Generate WhatsApp message

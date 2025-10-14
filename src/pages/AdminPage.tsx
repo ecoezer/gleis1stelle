@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import AdminLogin from '../components/AdminLogin';
+import SimpleAdminLogin from '../components/SimpleAdminLogin';
 import AdminOrderHistory from '../components/AdminOrderHistory';
 
 const AdminPage: React.FC = () => {
-  const [token, setToken] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedToken = sessionStorage.getItem('admin_token');
-    if (savedToken) {
-      setToken(savedToken);
+    const authStatus = sessionStorage.getItem('admin_authenticated');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
     }
   }, []);
 
-  const handleLoginSuccess = (newToken: string) => {
-    setToken(newToken);
-    sessionStorage.setItem('admin_token', newToken);
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+    sessionStorage.setItem('admin_authenticated', 'true');
   };
 
   const handleLogout = () => {
-    setToken(null);
-    sessionStorage.removeItem('admin_token');
+    setIsAuthenticated(false);
+    sessionStorage.removeItem('admin_authenticated');
   };
 
-  if (!token) {
-    return <AdminLogin onLoginSuccess={handleLoginSuccess} />;
+  if (!isAuthenticated) {
+    return <SimpleAdminLogin onLoginSuccess={handleLoginSuccess} />;
   }
 
-  return <AdminOrderHistory token={token} onLogout={handleLogout} />;
+  return <AdminOrderHistory onLogout={handleLogout} />;
 };
 
 export default AdminPage;

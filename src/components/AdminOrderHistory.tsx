@@ -1,81 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw } from 'lucide-react';
-
-interface OrderItem {
-  menuItemNumber: string | number;
-  name: string;
-  quantity: number;
-  basePrice: number;
-  totalPrice: number;
-  selectedSize?: { name: string; description?: string };
-  selectedIngredients?: string[];
-  selectedExtras?: string[];
-  selectedPastaType?: string;
-  selectedSauce?: string;
-  selectedExclusions?: string[];
-  selectedSideDish?: string;
-}
-
-interface Order {
-  id: string;
-  customer_name: string;
-  customer_phone: string;
-  delivery_address: string;
-  items: OrderItem[];
-  total_amount: number;
-  notes: string;
-  created_at: string;
-}
+import { fetchOrders, OrderData } from '../services/orderService';
 
 interface AdminOrderHistoryProps {
-  token: string;
   onLogout: () => void;
 }
 
-const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ token, onLogout }) => {
-  const [orders, setOrders] = useState<Order[]>([]);
+const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
+  const [orders, setOrders] = useState<OrderData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const fetchOrders = async () => {
+  const loadOrders = async () => {
     setIsLoading(true);
     setError('');
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-orders`,
-        {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.success) {
-        setOrders(data.orders || []);
-      } else {
-        setError(data.error || 'Failed to fetch orders');
-        if (response.status === 401) {
-          onLogout();
-        }
-      }
+      const fetchedOrders = await fetchOrders();
+      setOrders(fetchedOrders);
     } catch (err) {
-      setError('Connection error. Please try again.');
+      setError('Failed to load orders. Please try again.');
+      console.error('Error loading orders:', err);
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchOrders();
-  }, [token]);
+    loadOrders();
+  }, []);
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
+  const formatDate = (timestamp: any) => {
+    if (!timestamp) return 'N/A';
+    let date: Date;
+    if (timestamp.toDate) {
+      date = timestamp.toDate();
+    } else if (timestamp.seconds) {
+      date = new Date(timestamp.seconds * 1000);
+    } else {
+      date = new Date(timestamp);
+    }
     return date.toLocaleString('de-DE', {
       day: '2-digit',
       month: '2-digit',
@@ -95,7 +59,7 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ token, onLogout }
           </h1>
           <div className="flex items-center gap-3">
             <button
-              onClick={fetchOrders}
+              onClick={loadOrders}
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
