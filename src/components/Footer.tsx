@@ -42,8 +42,8 @@ const Footer = () => {
               <MapPin className="h-3.5 w-3.5 text-orange-600" />
             </div>
           </div>
-          <div className="font-bold text-gray-800 text-sm">🏠 FRANKFURTER STR. 7</div>
-          <div className="text-xs text-gray-600">📮 38729 LUTTER AM BARENBERGE</div>
+          <div className="font-bold text-gray-800 text-sm">🏠 BAHNHOFSTRASSE 39</div>
+          <div className="text-xs text-gray-600">📮 21435 STELLE</div>
           <p className="text-xs text-gray-500">🚗 Gleis1 Pizza & Döner Lieferservice</p>
         </div>
 
@@ -79,7 +79,7 @@ const Footer = () => {
         {/* Footer Text */}
         <div className="space-y-0.5">
           <div className="font-medium text-gray-700 text-sm">
-            🍽️ Leckere Döner, Pizza & mehr in Lutter am Barenberge
+            🍽️ Leckere Döner, Pizza & mehr in Stelle
           </div>
           <p className="text-xs text-gray-500">
             © 2025 Gleis1 Pizza & Döner 🚕 - Alle Rechte vorbehalten
