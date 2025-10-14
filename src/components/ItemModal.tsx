@@ -3,7 +3,7 @@ import { X, Plus, ShoppingCart, AlertTriangle } from 'lucide-react';
 import { MenuItem, PizzaSize } from '../types';
 import {
   wunschPizzaIngredients, pizzaExtras, pastaTypes,
-  sauceTypes, saladSauceTypes, pommesSauceTypes, beerTypes, meatTypes, saladExclusionOptions, sideDishOptions, drehspiessaSauceTypes, snackSauceTypes, pizzabroetchenSauceTypes
+  sauceTypes, saladSauceTypes, pommesSauceTypes, beerTypes, saladExclusionOptions, sideDishOptions, drehspiessaSauceTypes, snackSauceTypes, pizzabroetchenSauceTypes
 } from '../data/menuItems';
 
 interface ItemModalProps {
@@ -254,7 +254,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
             <div className="mb-6">
               <p className="text-sm font-medium text-gray-900 mb-1">Produktinfo</p>
               <p className="text-sm text-gray-600">
-                {item.description ? item.description : `zzgl. Pfand (0,08 €) 4,8% vol, 0,33l, ${(item.price / 0.33).toFixed(2).replace('.', ',')} €/1l`}
+                {item.description ? item.description : `4,8% vol, 0,33l, ${(item.price / 0.33).toFixed(2).replace('.', ',')} €/1l`}
               </p>
             </div>
 
@@ -310,21 +310,21 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
               )}
             </h2>
             {currentStep === 'meat' && item.description && (
-              <p className="text-sm opacity-90 mt-1">mit Kalbfleisch - {item.description}</p>
+              <p className="text-sm opacity-90 mt-1">{item.description}</p>
             )}
             {currentStep === 'sauce' && (
               <p className="text-sm opacity-90 mt-1">
-                mit Kalbfleisch - Nr. {item.number} {item.name}
+                Nr. {item.number} {item.name}
               </p>
             )}
             {currentStep === 'exclusions' && (
               <p className="text-sm opacity-90 mt-1">
-                mit Kalbfleisch mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
+                mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
               </p>
             )}
             {currentStep === 'sidedish' && (
               <p className="text-sm opacity-90 mt-1">
-                mit Kalbfleisch mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
+                mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
               </p>
             )}
           </div>
@@ -375,7 +375,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
               </div>
               <div className="text-sm text-gray-600">
                 <p className="font-medium text-gray-900 mb-1">Produktinfo</p>
-                <p>zzgl. Pfand (0,08 €) 4,8% vol, 0,33l, {(item.price / 0.33).toFixed(2).replace('.', ',')} €/1l</p>
+                <p>4,8% vol, 0,33l, {(item.price / 0.33).toFixed(2).replace('.', ',')} €/1l</p>
               </div>
             </div>
           )}
@@ -567,7 +567,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="font-medium text-gray-900">mit Kalbfleisch</span>
+                  <span className="font-medium text-gray-900">Kalbfleisch</span>
                 </div>
               </div>
             </div>
