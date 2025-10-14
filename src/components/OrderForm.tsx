@@ -161,38 +161,38 @@ const OrderForm: React.FC<OrderFormProps> = ({
 
   // Generate WhatsApp message
   const generateWhatsAppMessage = useCallback((data: OrderFormData) => {
-    let message = `🍕 *Neue Bestellung - by Ali und Mesut*\n\n`;
-    
+    let message = `*Neue Bestellung - by Ali und Mesut*\n\n`;
+
     // Customer info
-    message += `👤 *Kunde:* ${data.name}\n`;
-    message += `📞 *Telefon:* ${data.phone}\n`;
-    message += `📦 *Art:* ${data.orderType === 'pickup' ? 'Abholung' : 'Lieferung'}\n`;
-    
+    message += `*Kunde:* ${data.name}\n`;
+    message += `*Telefon:* ${data.phone}\n`;
+    message += `*Art:* ${data.orderType === 'pickup' ? 'Abholung' : 'Lieferung'}\n`;
+
     if (data.orderType === 'delivery' && data.deliveryZone) {
       const zone = DELIVERY_ZONES[data.deliveryZone as keyof typeof DELIVERY_ZONES];
-      message += `📍 *Adresse:* ${data.street} ${data.houseNumber}, ${data.postcode}\n`;
-      message += `🗺️ *Gebiet:* ${zone?.label}\n`;
+      message += `*Adresse:* ${data.street} ${data.houseNumber}, ${data.postcode}\n`;
+      message += `*Gebiet:* ${zone?.label}\n`;
     }
-    
-    message += `⏰ *Zeit:* ${data.deliveryTime === 'asap' ? 'So schnell wie möglich' : `Um ${data.specificTime} Uhr`}\n\n`;
-    
+
+    message += `*Zeit:* ${data.deliveryTime === 'asap' ? 'So schnell wie möglich' : `Um ${data.specificTime} Uhr`}\n\n`;
+
     // Order items
-    message += `🛒 *Bestellung:*\n`;
+    message += `*Bestellung:*\n`;
     orderItems.forEach(item => {
       let itemText = `${item.quantity}x Nr. ${item.menuItem.number} ${item.menuItem.name}`;
-      
+
       if (item.selectedSize) {
         itemText += ` (${item.selectedSize.name}${item.selectedSize.description ? ` - ${item.selectedSize.description}` : ''})`;
       }
-      
+
       if (item.selectedPastaType) {
         itemText += ` - Nudelsorte: ${item.selectedPastaType}`;
       }
-      
+
       if (item.selectedSauce) {
         itemText += ` - Soße: ${item.selectedSauce}`;
       }
-      
+
       if (item.selectedExclusions && item.selectedExclusions.length > 0) {
         itemText += ` - Salat: ${item.selectedExclusions.join(', ')}`;
       }
@@ -204,30 +204,30 @@ const OrderForm: React.FC<OrderFormProps> = ({
       if (item.selectedIngredients && item.selectedIngredients.length > 0) {
         itemText += ` - Zutaten: ${item.selectedIngredients.join(', ')}`;
       }
-      
+
       if (item.selectedExtras && item.selectedExtras.length > 0) {
         itemText += ` - Extras: ${item.selectedExtras.join(', ')} (+${(item.selectedExtras.length * 1.00).toFixed(2).replace('.', ',')}€)`;
       }
-      
+
       const itemTotal = (calculateItemPrice(item) * item.quantity).toFixed(2).replace('.', ',');
       itemText += ` = ${itemTotal} €`;
-      
+
       message += `• ${itemText}\n`;
     });
-    
+
     // Totals
-    message += `\n💰 *Zwischensumme:* ${subtotal.toFixed(2).replace('.', ',')} €\n`;
-    
+    message += `\n*Zwischensumme:* ${subtotal.toFixed(2).replace('.', ',')} €\n`;
+
     if (deliveryFee > 0) {
-      message += `🚗 *Liefergebühr:* ${deliveryFee.toFixed(2).replace('.', ',')} €\n`;
+      message += `*Liefergebühr:* ${deliveryFee.toFixed(2).replace('.', ',')} €\n`;
     }
-    
-    message += `💳 *Gesamtbetrag:* ${total.toFixed(2).replace('.', ',')} €\n`;
-    
+
+    message += `*Gesamtbetrag:* ${total.toFixed(2).replace('.', ',')} €\n`;
+
     if (data.note) {
-      message += `\n📝 *Anmerkung:* ${data.note}`;
+      message += `\n*Anmerkung:* ${data.note}`;
     }
-    
+
     return encodeURIComponent(message);
   }, [orderItems, subtotal, deliveryFee, total]);
 
