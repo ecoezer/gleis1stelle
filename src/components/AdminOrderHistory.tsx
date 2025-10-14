@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw, Monitor, Smartphone, Calendar, Trash2 } from 'lucide-react';
+import { ShoppingBag, Clock, Phone, MapPin, Package, LogOut, RefreshCw, Monitor, Smartphone, Calendar, Trash2, Globe } from 'lucide-react';
 import { fetchOrders, deleteOrder, OrderData } from '../services/orderService';
 
 interface AdminOrderHistoryProps {
@@ -148,6 +148,16 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
     } finally {
       setDeletingOrderId(null);
     }
+  };
+
+  const getCountryFlag = (ip: string): string => {
+    if (!ip) return '🌍';
+    if (ip.startsWith('192.168') || ip.startsWith('10.') || ip.startsWith('172.')) return '🏠';
+    const firstOctet = parseInt(ip.split('.')[0]);
+    if (firstOctet >= 1 && firstOctet <= 50) return '🇺🇸';
+    if (firstOctet >= 51 && firstOctet <= 100) return '🇬🇧';
+    if (firstOctet >= 101 && firstOctet <= 150) return '🇩🇪';
+    return '🌍';
   };
 
   const totalAmount = filteredOrders.reduce((sum, order) => sum + order.total_amount, 0);
@@ -316,7 +326,7 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
                   )}
                 </button>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pr-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pr-10">
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5 text-xs text-gray-500">
@@ -359,6 +369,7 @@ const AdminOrderHistory: React.FC<AdminOrderHistoryProps> = ({ onLogout }) => {
                         )}
                         {order.ip_address && (
                           <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                            <span className="text-base leading-none">{getCountryFlag(order.ip_address)}</span>
                             <span className="font-medium">IP:</span>
                             <span>{order.ip_address}</span>
                           </div>
