@@ -43,7 +43,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="font-bold text-gray-800 text-sm">🏠 BAHNHOFSTRASSE 39</div>
-          <div className="text-xs text-gray-600">📮 21435 STELLE</div>
+          <div className="text-xs text-gray-600">📮 21435 STELLE (ASHAUSEN)</div>
           <p className="text-xs text-gray-500">🚗 Gleis1 Pizza & Döner Lieferservice</p>
         </div>
 
