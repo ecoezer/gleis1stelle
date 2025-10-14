@@ -120,6 +120,14 @@ export const snacks: readonly MenuItem[] = [
   { id: 590, number: 20, name: "Currywurst Pommes", description: "", price: 7.00, isSpezialitaet: true, allergens: "Ao, G, I, K, 6, 8.2, 9, 9.I, 17" }
 ];
 
+// Schnitzel
+export const schnitzel: readonly MenuItem[] = [
+  { id: 580, number: 70, name: "Jäger Schnitzel", description: "mit Champignonsauce & Pommes", price: 11.50, isSpezialitaet: true, allergens: "1, 3, 8.2, 9, 14" },
+  { id: 581, number: 71, name: "Wiener Art Schnitzel", description: "mit Zitrone", price: 11.50, isSpezialitaet: true },
+  { id: 582, number: 72, name: "Zigeunerschnitzel", description: "mit Zigeunersauce", price: 11.50, isSpezialitaet: true, allergens: "1, 3, 8.2, 9, 14" },
+  { id: 583, number: 73, name: "Sauce Hollandaise Schnitzel", description: "mit Sauce Hollandaise", price: 12.00, isSpezialitaet: true, allergens: "Aa, B, G, E, I, K, M, 3, 14, 17, 18" }
+];
+
 // Salads
 export const salads: readonly MenuItem[] = [
   { id: 564, number: 64, name: "Bauernsalat", description: "mit Eisbergsalat, Gurken, Tomaten und Zwiebeln", price: 7.00, isSpezialitaet: true },
