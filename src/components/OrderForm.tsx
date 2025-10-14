@@ -425,281 +425,213 @@ const OrderForm: React.FC<OrderFormProps> = ({
   return (
     <div className={`flex flex-col min-h-0 transition-all duration-500 ${isClearing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
       {!hideTitle && (
-        <div className="bg-orange-500 text-white p-4 sticky top-0 z-10">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <ShoppingCart className="w-5 h-5" />
+        <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
+          <div className="p-4 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+              <ShoppingCart className="w-5 h-5 text-orange-600" />
               Warenkorb
             </h2>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleClearCart}
-                disabled={isClearing}
-                className={`flex items-center gap-1 text-white bg-red-500 hover:bg-red-600 transition-all duration-200 px-3 py-1.5 rounded-lg text-sm font-medium shadow-md hover:shadow-lg ${isClearing ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
-                title="Warenkorb leeren"
-              >
-                <Trash2 className="w-4 h-4" />
-                {isClearing ? 'Wird geleert...' : 'Leer'}
-              </button>
-            </div>
+            <button
+              onClick={handleClearCart}
+              disabled={isClearing}
+              className={`text-sm text-red-600 hover:text-red-700 font-medium transition-colors ${isClearing ? 'opacity-50 cursor-not-allowed' : ''}`}
+              title="Warenkorb leeren"
+            >
+              {isClearing ? 'Wird geleert...' : 'Alles löschen'}
+            </button>
           </div>
         </div>
       )}
 
 
       <div className="flex-1 p-4 space-y-4 overflow-y-auto">
-        {/* Clear Cart Button - Always visible when hideTitle is true */}
         {hideTitle && orderItems.length > 0 && (
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-end mb-2">
             <button
               onClick={handleClearCart}
               disabled={isClearing}
-              className={`flex items-center gap-2 text-white bg-red-500 hover:bg-red-600 transition-all duration-200 px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:shadow-lg z-50 ${isClearing ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
+              className={`text-sm text-red-600 hover:text-red-700 font-medium transition-colors ${isClearing ? 'opacity-50 cursor-not-allowed' : ''}`}
               title="Warenkorb leeren"
             >
-              <Trash2 className="w-4 h-4" />
-              {isClearing ? 'Wird geleert...' : 'Warenkorb leeren'}
+              {isClearing ? 'Wird geleert...' : 'Alles löschen'}
             </button>
           </div>
         )}
 
-        {/* Order Items */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {itemsToShow.map((item, index) => (
-            <div key={index} className="rounded-xl p-4 shadow-sm border border-orange-100" style={{ backgroundColor: '#fefbf7' }}>
+            <div key={index} className="bg-white rounded-lg border border-gray-200 p-4">
               <div className="space-y-3">
-                {/* Item Header */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-gray-900 text-base leading-tight">
+                  <h4 className="font-medium text-gray-900 text-sm leading-tight">
                     Nr. {item.menuItem.number} {item.menuItem.name}
                   </h4>
                 </div>
 
-                {/* Item Details */}
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {item.selectedSize && (
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        📏 {item.selectedSize.name}
-                      {item.selectedSize.description && ` - ${item.selectedSize.description}`}
-                      </span>
+                    <div className="text-xs text-gray-600">
+                      {item.selectedSize.name}{item.selectedSize.description && ` - ${item.selectedSize.description}`}
                     </div>
                   )}
-                  
+
                   {item.selectedPastaType && (
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                        🍝 {item.selectedPastaType}
-                      </span>
+                    <div className="text-xs text-gray-600">
+                      Pasta: {item.selectedPastaType}
                     </div>
                   )}
-                  
+
                   {item.selectedSauce && (
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                        🥄 {item.selectedSauce}
-                      </span>
+                    <div className="text-xs text-gray-600">
+                      Sauce: {item.selectedSauce}
                     </div>
                   )}
-                  
+
                   {item.selectedExclusions && item.selectedExclusions.length > 0 && (
-                    <div className="space-y-1">
-                      <p className="text-xs font-medium text-gray-600">🥗 Salat-Anpassungen:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {item.selectedExclusions.map((exclusion, idx) => (
-                          <span key={idx} className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-800">
-                            {exclusion}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="text-xs text-gray-600">
+                      Salat: {item.selectedExclusions.join(', ')}
                     </div>
                   )}
 
                   {item.selectedSideDish && (
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
-                        🍟 {item.selectedSideDish}
-                      </span>
+                    <div className="text-xs text-gray-600">
+                      Beilage: {item.selectedSideDish}
                     </div>
                   )}
-                  
+
                   {item.selectedIngredients && item.selectedIngredients.length > 0 && (
-                    <div className="space-y-1">
-                      <p className="text-xs font-medium text-gray-600">🥬 Zutaten:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {item.selectedIngredients.map((ingredient, idx) => (
-                          <span key={idx} className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-800">
-                            {ingredient}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="text-xs text-gray-600">
+                      Zutaten: {item.selectedIngredients.join(', ')}
                     </div>
                   )}
-                  
+
                   {item.selectedExtras && item.selectedExtras.length > 0 && (
-                    <div className="space-y-1">
-                      <p className="text-xs font-medium text-gray-600">➕ Extras (+{(item.selectedExtras.length * 1.00).toFixed(2)}€):</p>
-                      <div className="flex flex-wrap gap-1">
-                        {item.selectedExtras.map((extra, idx) => (
-                          <span key={idx} className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-purple-100 text-purple-800">
-                            {extra}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="text-xs text-gray-600">
+                      Extras: {item.selectedExtras.join(', ')} (+{(item.selectedExtras.length * 1.00).toFixed(2)}€)
                     </div>
                   )}
                 </div>
                 
-                {/* Price and Controls */}
-                <div className="flex items-center justify-between pt-2 border-t border-orange-200">
-                  <div className="text-lg font-bold text-orange-600">
+                <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                  <div className="text-base font-semibold text-gray-900">
                     {(calculateItemPrice(item) * item.quantity).toFixed(2).replace('.', ',')} €
                   </div>
-                  
-                  <div className="flex items-center gap-3">
-                    {/* Quantity Controls */}
-                    <div className="flex items-center gap-2 bg-white rounded-lg p-1 shadow-sm border border-orange-200">
-                  <button
-                    onClick={() => handleQuantityChange(item, item.quantity - 1)}
-                        className="w-8 h-8 rounded-md bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-                  >
-                    <Minus className="w-4 h-4" />
-                  </button>
-                  
-                      <span className="w-8 text-center font-semibold text-gray-900">{item.quantity}</span>
-                  
-                  <button
-                    onClick={() => handleQuantityChange(item, item.quantity + 1)}
-                        className="w-8 h-8 rounded-md bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center transition-colors"
-                  >
-                    <Plus className="w-4 h-4" />
-                  </button>
+
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center border border-gray-200 rounded-lg">
+                      <button
+                        onClick={() => handleQuantityChange(item, item.quantity - 1)}
+                        className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                      >
+                        <Minus className="w-4 h-4 text-gray-600" />
+                      </button>
+
+                      <span className="w-8 text-center text-sm font-medium text-gray-900">{item.quantity}</span>
+
+                      <button
+                        onClick={() => handleQuantityChange(item, item.quantity + 1)}
+                        className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                      >
+                        <Plus className="w-4 h-4 text-gray-600" />
+                      </button>
                     </div>
-                    
-                    {/* Remove Button */}
-                  <button
-                    onClick={() => handleRemoveItem(item)}
-                      className="w-8 h-8 rounded-md bg-red-500 hover:bg-red-600 text-white flex items-center justify-center transition-colors shadow-sm"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+
+                    <button
+                      onClick={() => handleRemoveItem(item)}
+                      className="w-8 h-8 flex items-center justify-center hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4 text-red-600" />
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           ))}
 
-          {/* Expand/Collapse Button */}
           {shouldCollapse && (
             <div className="text-center">
               <button
                 onClick={() => setShowAllItems(!showAllItems)}
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-colors"
+                className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >
                 {showAllItems ? (
-                  <>
-                    <span>Weniger anzeigen</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                    </svg>
-                  </>
+                  'Weniger anzeigen'
                 ) : (
-                  <>
-                    <span>Alle {totalItemsCount} Artikel anzeigen ({hiddenItemsCount} weitere)</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </>
+                  `Alle ${totalItemsCount} Artikel anzeigen (${hiddenItemsCount} weitere)`
                 )}
               </button>
             </div>
           )}
         </div>
 
-        {/* Order Summary */}
-        <div className="rounded-xl p-5 space-y-3 bg-gradient-to-br from-orange-50 to-yellow-50 border-2 border-orange-200 shadow-sm">
-          <h3 className="font-semibold text-gray-900 text-base mb-3 flex items-center gap-2">
-            💰 Bestellübersicht
-          </h3>
-          
-          <div className="space-y-2">
-            <div className="flex justify-between items-center py-1">
-              <span className="text-gray-700">Zwischensumme:</span>
-              <span className="font-semibold text-gray-900">{subtotal.toFixed(2).replace('.', ',')} €</span>
-            </div>
-            
-            {deliveryFee > 0 && (
-              <div className="flex justify-between items-center py-1">
-                <span className="text-gray-700">Liefergebühr:</span>
-                <span className="font-semibold text-gray-900">{deliveryFee.toFixed(2).replace('.', ',')} €</span>
-              </div>
-            )}
+        <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+          <div className="flex justify-between items-center text-sm">
+            <span className="text-gray-600">Zwischensumme</span>
+            <span className="font-medium text-gray-900">{subtotal.toFixed(2).replace('.', ',')} €</span>
           </div>
-          
-          <div className="border-t-2 border-orange-300 pt-3 mt-3">
+
+          {deliveryFee > 0 && (
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-gray-600">Liefergebühr</span>
+              <span className="font-medium text-gray-900">{deliveryFee.toFixed(2).replace('.', ',')} €</span>
+            </div>
+          )}
+
+          <div className="border-t border-gray-200 pt-2 mt-2">
             <div className="flex justify-between items-center">
-              <span className="text-lg font-bold text-gray-900">Gesamtbetrag:</span>
-              <span className="text-xl font-bold text-orange-600 bg-white px-3 py-1 rounded-lg shadow-sm">
+              <span className="font-semibold text-gray-900">Gesamt</span>
+              <span className="text-lg font-semibold text-gray-900">
                 {total.toFixed(2).replace('.', ',')} €
               </span>
             </div>
           </div>
-          
+
           {!canOrder && minOrderMessage && (
-            <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-sm text-red-700 font-medium flex items-center gap-2">
-                ⚠️ {minOrderMessage}
-              </p>
+            <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded text-sm text-red-700">
+              {minOrderMessage}
             </div>
           )}
         </div>
 
-        {/* Order Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Order Type */}
-          <div className="space-y-3">
-            <label className="block text-base font-semibold text-gray-900 flex items-center gap-2">
-              📦 Bestellart *
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-900">
+              Bestellart
             </label>
-            <div className="grid grid-cols-2 gap-3">
-              <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-xl border-2 transition-all hover:bg-orange-50" 
-                     style={{ 
-                       backgroundColor: watchOrderType === 'pickup' ? '#fff7ed' : '#fefbf7',
-                       borderColor: watchOrderType === 'pickup' ? '#fb923c' : '#fed7aa'
-                     }}>
+            <div className="grid grid-cols-2 gap-2">
+              <label className={`flex items-center justify-center cursor-pointer p-3 rounded-lg border-2 transition-all ${
+                watchOrderType === 'pickup' ? 'border-orange-500 bg-orange-50' : 'border-gray-200 bg-white hover:border-gray-300'
+              }`}>
                 <input
                   type="radio"
                   value="pickup"
                   {...register('orderType')}
-                  className="text-orange-500 focus:ring-orange-500 w-4 h-4"
+                  className="sr-only"
                 />
-                <span className="text-sm font-medium">🏃‍♂️ Abholung</span>
+                <span className="text-sm font-medium text-gray-900">Abholung</span>
               </label>
-              <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-xl border-2 transition-all hover:bg-orange-50"
-                     style={{ 
-                       backgroundColor: watchOrderType === 'delivery' ? '#fff7ed' : '#fefbf7',
-                       borderColor: watchOrderType === 'delivery' ? '#fb923c' : '#fed7aa'
-                     }}>
+              <label className={`flex items-center justify-center cursor-pointer p-3 rounded-lg border-2 transition-all ${
+                watchOrderType === 'delivery' ? 'border-orange-500 bg-orange-50' : 'border-gray-200 bg-white hover:border-gray-300'
+              }`}>
                 <input
                   type="radio"
                   value="delivery"
                   {...register('orderType')}
-                  className="text-orange-500 focus:ring-orange-500 w-4 h-4"
+                  className="sr-only"
                 />
-                <span className="text-sm font-medium">🚗 Lieferung</span>
+                <span className="text-sm font-medium text-gray-900">Lieferung</span>
               </label>
             </div>
           </div>
 
-          {/* Delivery Zone */}
           {watchOrderType === 'delivery' && (
-            <div className="space-y-3">
-              <label className="block text-base font-semibold text-gray-900 flex items-center gap-2">
-                🗺️ Liefergebiet *
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-900">
+                Liefergebiet
               </label>
               <select
                 {...register('deliveryZone')}
-                className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
+                className="w-full rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 p-2.5 text-sm bg-white"
               >
                 <option value="">Bitte wählen...</option>
                 {Object.entries(DELIVERY_ZONES).map(([key, zone]) => (
@@ -709,25 +641,24 @@ const OrderForm: React.FC<OrderFormProps> = ({
                 ))}
               </select>
               {errors.deliveryZone && (
-                <p className="text-sm text-red-600 flex items-center gap-1">
-                  ⚠️ {errors.deliveryZone.message}
+                <p className="text-xs text-red-600">
+                  {errors.deliveryZone.message}
                 </p>
               )}
             </div>
           )}
 
-          {/* Delivery Address */}
           {watchOrderType === 'delivery' && (
-            <div className="space-y-3">
-              <label className="block text-base font-semibold text-gray-900 flex items-center gap-2">
-                📍 Lieferadresse *
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-900">
+                Lieferadresse
               </label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2">
                 <div>
                   <input
                     type="text"
                     {...register('street')}
-                    className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
+                    className="w-full rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 p-2.5 text-sm bg-white"
                     placeholder="Straße"
                   />
                 </div>
@@ -735,7 +666,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
                   <input
                     type="text"
                     {...register('houseNumber')}
-                    className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
+                    className="w-full rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 p-2.5 text-sm bg-white"
                     placeholder="Nr."
                   />
                 </div>
@@ -743,7 +674,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
                   <input
                     type="text"
                     {...register('postcode')}
-                    className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
+                    className="w-full rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 p-2.5 text-sm bg-white"
                     placeholder="Postleitzahl"
                   />
                 </div>
@@ -751,45 +682,40 @@ const OrderForm: React.FC<OrderFormProps> = ({
             </div>
           )}
 
-          {/* Delivery Time */}
-          <div className="space-y-3">
-            <label className="block text-base font-semibold text-gray-900 flex items-center gap-2">
-              ⏰ Lieferzeit *
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-900">
+              Lieferzeit
             </label>
-            <div className="space-y-3">
-              <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-xl border-2 transition-all hover:bg-orange-50"
-                     style={{
-                       backgroundColor: watchDeliveryTime === 'asap' ? '#fff7ed' : '#fefbf7',
-                       borderColor: watchDeliveryTime === 'asap' ? '#fb923c' : '#fed7aa'
-                     }}>
+            <div className="space-y-2">
+              <label className={`flex items-center cursor-pointer p-3 rounded-lg border-2 transition-all ${
+                watchDeliveryTime === 'asap' ? 'border-orange-500 bg-orange-50' : 'border-gray-200 bg-white hover:border-gray-300'
+              }`}>
                 <input
                   type="radio"
                   value="asap"
                   {...register('deliveryTime')}
-                  className="text-orange-500 focus:ring-orange-500 w-4 h-4"
+                  className="sr-only"
                 />
-                <span className="text-sm font-medium">⚡ So schnell wie möglich</span>
+                <span className="text-sm font-medium text-gray-900">So schnell wie möglich</span>
               </label>
-              <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-xl border-2 transition-all hover:bg-orange-50"
-                     style={{
-                       backgroundColor: watchDeliveryTime === 'specific' ? '#fff7ed' : '#fefbf7',
-                       borderColor: watchDeliveryTime === 'specific' ? '#fb923c' : '#fed7aa'
-                     }}>
+              <label className={`flex items-center cursor-pointer p-3 rounded-lg border-2 transition-all ${
+                watchDeliveryTime === 'specific' ? 'border-orange-500 bg-orange-50' : 'border-gray-200 bg-white hover:border-gray-300'
+              }`}>
                 <input
                   type="radio"
                   value="specific"
                   {...register('deliveryTime')}
-                  className="text-orange-500 focus:ring-orange-500 w-4 h-4"
+                  className="sr-only"
                 />
-                <span className="text-sm font-medium">🕐 Zu bestimmter Zeit</span>
+                <span className="text-sm font-medium text-gray-900">Zu bestimmter Zeit</span>
               </label>
             </div>
 
             {watchDeliveryTime === 'specific' && (
-              <div className="space-y-2">
+              <div className="mt-2 space-y-1">
                 <select
                   {...register('specificTime')}
-                  className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
+                  className="w-full rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 p-2.5 text-sm bg-white"
                 >
                   <option value="">Bitte wählen...</option>
                   {(() => {
@@ -825,92 +751,83 @@ const OrderForm: React.FC<OrderFormProps> = ({
                     ));
                   })()}
                 </select>
-                <p className="text-xs text-gray-600">
-                  Bestellungen können mindestens 20 Minuten im Voraus aufgegeben werden
+                <p className="text-xs text-gray-500">
+                  Mindestens 20 Minuten im Voraus
                 </p>
               </div>
             )}
             {errors.specificTime && (
-              <p className="text-sm text-red-600 flex items-center gap-1">
-                ⚠️ {errors.specificTime.message}
+              <p className="text-xs text-red-600">
+                {errors.specificTime.message}
               </p>
             )}
           </div>
 
-          {/* Customer Information */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-gray-900 text-base flex items-center gap-2">
-              👤 Ihre Kontaktdaten
-            </h3>
-            
-            <div className="space-y-3">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  {...register('name')}
-                  className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
-                  placeholder="Ihr Name"
-                />
-                {errors.name && (
-                  <p className="text-sm text-red-600 mt-1 flex items-center gap-1">
-                    ⚠️ {errors.name.message}
-                  </p>
-                )}
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Telefonnummer *
-                </label>
-                <input
-                  type="tel"
-                  {...register('phone')}
-                  className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white"
-                  placeholder="0123 456789"
-                />
-                {errors.phone && (
-                  <p className="text-sm text-red-600 mt-1 flex items-center gap-1">
-                    ⚠️ {errors.phone.message}
-                  </p>
-                )}
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Anmerkungen (optional)
-                </label>
-                <textarea
-                  {...register('note')}
-                  rows={3}
-                  className="w-full rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-orange-500 p-3 text-sm bg-white resize-none"
-                  placeholder="Besondere Wünsche, Allergien, etc."
-                />
-              </div>
+          <div className="space-y-3">
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">
+                Name
+              </label>
+              <input
+                type="text"
+                {...register('name')}
+                className="w-full rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 p-2.5 text-sm bg-white"
+                placeholder="Ihr Name"
+              />
+              {errors.name && (
+                <p className="text-xs text-red-600 mt-1">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">
+                Telefonnummer
+              </label>
+              <input
+                type="tel"
+                {...register('phone')}
+                className="w-full rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 p-2.5 text-sm bg-white"
+                placeholder="0123 456789"
+              />
+              {errors.phone && (
+                <p className="text-xs text-red-600 mt-1">
+                  {errors.phone.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">
+                Anmerkungen (optional)
+              </label>
+              <textarea
+                {...register('note')}
+                rows={3}
+                className="w-full rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 p-2.5 text-sm bg-white resize-none"
+                placeholder="Besondere Wünsche, Allergien, etc."
+              />
             </div>
           </div>
 
-          {/* Submit Button */}
           <div className="pt-2">
             <button
               type="submit"
               disabled={!canOrder || orderItems.length === 0 || isSubmitting}
-              className={`w-full py-4 px-6 rounded-xl font-semibold text-base flex items-center justify-center gap-3 transition-all shadow-lg ${
+              className={`w-full py-3 px-4 rounded-lg font-medium text-sm flex items-center justify-center gap-2 transition-colors ${
                 canOrder && orderItems.length > 0 && !isSubmitting
-                  ? 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white transform hover:scale-[1.02] active:scale-[0.98]'
-                  : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                  ? 'bg-orange-600 hover:bg-orange-700 text-white'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
               {isSubmitting ? (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                  Bestellung wird gesendet...
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  Wird gesendet...
                 </>
               ) : (
                 <>
-                  <Send className="w-5 h-5" />
                   Per WhatsApp bestellen
                 </>
               )}
