@@ -122,21 +122,21 @@ export const snacks: readonly MenuItem[] = [
 
 // Salads
 export const salads: readonly MenuItem[] = [
-  { id: 562, number: 62, name: "Bauernsalat", description: "mit Eisbergsalat, Gurken, Tomaten und Zwiebeln", price: 7.00, isSpezialitaet: true },
-  { id: 563, number: 63, name: "Hirtensalat", description: "mit Eisbergsalat, Gurken, Tomaten, Zwiebeln und Feta-Käse", price: 7.50, isSpezialitaet: true },
-  { id: 564, number: 64, name: "Thunfischsalat", description: "mit Eisbergsalat, Gurken, Tomaten, Zwiebeln und Thunfisch", price: 8.50, isSpezialitaet: true },
-  { id: 565, number: 65, name: "Hähnchenbrust-Salat", description: "mit Eisbergsalat, Gurken, Tomaten, Zwiebeln und gegrillter Hähnchenbrust", price: 9.00, isSpezialitaet: true },
-  { id: 566, number: 66, name: "Mozzarella-Salat", description: "mit Eisbergsalat, Tomaten, frischem Mozzarella und Basilikum", price: 8.50, isSpezialitaet: true }
+  { id: 564, number: 64, name: "Bauernsalat", description: "mit Eisbergsalat, Gurken, Tomaten und Zwiebeln", price: 7.00, isSpezialitaet: true },
+  { id: 565, number: 65, name: "Hirtensalat", description: "mit Eisbergsalat, Gurken, Tomaten, Zwiebeln und Feta-Käse", price: 7.00, isSpezialitaet: true, allergens: "I" },
+  { id: 566, number: 66, name: "Thunfischsalat", description: "mit Eisbergsalat, Gurken, Tomaten, Zwiebeln und Thunfisch", price: 8.00, isSpezialitaet: true, allergens: "F" },
+  { id: 567, number: 67, name: "Hähnchenbrustsalat", description: "mit Eisbergsalat, Gurken, Tomaten, Zwiebeln und gegrillter Hähnchenbrust", price: 8.50, isSpezialitaet: true },
+  { id: 568, number: 68, name: "Mozzarella-Salat", description: "mit Eisbergsalat, Tomaten, frischem Mozzarella und Basilikum", price: 8.00, isSpezialitaet: true, allergens: "I" }
 ];
 
 // Dips
 export const dips: readonly MenuItem[] = [
-  { id: 567, number: 67, name: "Tzatziki", description: "", price: 2.00 },
-  { id: 568, number: 68, name: "Chili-Sauce", description: "", price: 2.00 },
-  { id: 569, number: 69, name: "Kräutersoße", description: "", price: 2.00 },
-  { id: 570, number: 70, name: "Curry Sauce", description: "", price: 2.00 },
-  { id: 571, number: 71, name: "Ketchup", description: "", price: 1.00 },
-  { id: 572, number: 72, name: "Mayonnaise", description: "", price: 1.00 }
+  { id: 569, number: 69, name: "Tzatziki", description: "", price: 2.00 },
+  { id: 570, number: 70, name: "Chili-Sauce", description: "", price: 2.00 },
+  { id: 571, number: 71, name: "Kräutersoße", description: "", price: 2.00 },
+  { id: 572, number: 72, name: "Curry Sauce", description: "", price: 2.00 },
+  { id: 573, number: 73, name: "Ketchup", description: "", price: 1.00 },
+  { id: 574, number: 74, name: "Mayonnaise", description: "", price: 1.00 }
 ];
 
 // Drinks
