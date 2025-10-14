@@ -52,7 +52,7 @@ const MENU_SECTIONS = [
   { id: 'salate', title: 'Salate', description: 'Alle Salate werden mit einem Dressing Ihrer Wahl zubereitet (z. B. Joghurt-, Balsamico- oder Essig-Öl-Dressing)', items: salads },
   { id: 'dips', title: 'Dips & Soßen', description: 'Leckere Dips und Soßen', items: dips },
   { id: 'alkoholfreie-getraenke', title: 'Alkoholfreie Getränke', description: 'Erfrischende alkoholfreie Getränke', items: alkoholfreieGetraenke },
-  { id: 'alkoholische-getraenke', title: 'Alkoholische Getränke', description: 'Biere', items: alkoholischeGetraenke }
+  { id: 'alkoholische-getraenke', title: 'Alkoholische Getränke', description: 'Alkoholische Getränke dürfen gemäß § 9 Jugendschutzgesetz (JuSchG) nur an Personen ab 18 Jahren abgegeben werden. Ein gültiger Ausweis ist vorzulegen.', items: alkoholischeGetraenke }
 ];
 
 function App() {
