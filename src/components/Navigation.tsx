@@ -160,19 +160,29 @@ const Navigation = () => {
           >
             {navigationItems.map(([id, label], index) => {
               const isActive = activeSection === id;
-              
+              const isAlcoholic = id === 'alkoholische-getraenke';
+
               return (
                 <button
                   key={id}
                   onClick={() => handleItemClick(id)}
-                  className={`flex-shrink-0 px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap ${
-                    isActive 
-                      ? 'bg-gray-900 text-white' 
+                  className={`flex-shrink-0 px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap flex items-center gap-2 ${
+                    isActive
+                      ? 'bg-gray-900 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                   style={{ scrollSnapAlign: 'start' }}
                 >
                   {label}
+                  {isAlcoholic && (
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded ${
+                      isActive
+                        ? 'bg-white text-gray-900'
+                        : 'bg-gray-900 text-white'
+                    }`}>
+                      18+
+                    </span>
+                  )}
                 </button>
               );
             })}
