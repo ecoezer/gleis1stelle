@@ -384,17 +384,17 @@ const OrderForm: React.FC<OrderFormProps> = ({
 
   const handleClearCart = useCallback(() => {
     setIsClearing(true);
-    
-    // After 3 seconds, actually clear the cart
+
+    // After 800ms, actually clear the cart
     setTimeout(() => {
       onClearCart();
       setIsClearing(false);
-      
+
       // Close mobile cart if the callback is provided
       if (onCloseMobileCart) {
         onCloseMobileCart();
       }
-    }, 3000);
+    }, 800);
   }, [onClearCart, onCloseMobileCart]);
 
   // Determine which items to show
@@ -421,7 +421,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
   }
 
   return (
-    <div className={`flex flex-col min-h-0 transition-all duration-2000 ${isClearing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+    <div className={`flex flex-col min-h-0 transition-all duration-500 ${isClearing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
       {!hideTitle && (
         <div className="bg-orange-500 text-white p-4 sticky top-0 z-10">
           <div className="flex items-center justify-between">
