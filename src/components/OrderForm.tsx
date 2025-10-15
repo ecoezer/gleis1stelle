@@ -265,8 +265,8 @@ const OrderForm: React.FC<OrderFormProps> = ({
         total
       };
 
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      const supabaseUrl = import.meta.env.VITE_Bolt_Database_URL;
+      const supabaseAnonKey = import.meta.env.VITE_Bolt_Database_ANON_KEY;
 
       const response = await fetch(`${supabaseUrl}/functions/v1/send-order-email`, {
         method: 'POST',
