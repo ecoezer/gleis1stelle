@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
 };
 
@@ -75,25 +75,25 @@ Deno.serve(async (req: Request) => {
           </style>
         </head>
         <body>
-          <div class="container">
-            <div class="header">
+          <div class=\"container\">
+            <div class=\"header\">
               <h1>Neue Bestellung</h1>
             </div>
-            <div class="content">
-              <div class="section">
-                <div class="section-title">Kundeninformationen</div>
-                <div class="info-row"><strong>Name:</strong> ${orderData.name}</div>
-                <div class="info-row"><strong>Telefon:</strong> ${orderData.phone}</div>
-                <div class="info-row"><strong>Bestellart:</strong> ${orderData.orderType === 'pickup' ? 'Abholung' : 'Lieferung'}</div>
+            <div class=\"content\">
+              <div class=\"section\">
+                <div class=\"section-title\">Kundeninformationen</div>
+                <div class=\"info-row\"><strong>Name:</strong> ${orderData.name}</div>
+                <div class=\"info-row\"><strong>Telefon:</strong> ${orderData.phone}</div>
+                <div class=\"info-row\"><strong>Bestellart:</strong> ${orderData.orderType === 'pickup' ? 'Abholung' : 'Lieferung'}</div>
                 ${orderData.orderType === 'delivery' && orderData.street ? `
-                  <div class="info-row"><strong>Adresse:</strong> ${orderData.street} ${orderData.houseNumber}, ${orderData.postcode}</div>
-                  ${orderData.deliveryZone ? `<div class="info-row"><strong>Gebiet:</strong> ${orderData.deliveryZone}</div>` : ''}
+                  <div class=\"info-row\"><strong>Adresse:</strong> ${orderData.street} ${orderData.houseNumber}, ${orderData.postcode}</div>
+                  ${orderData.deliveryZone ? `<div class=\"info-row\"><strong>Gebiet:</strong> ${orderData.deliveryZone}</div>` : ''}
                 ` : ''}
-                <div class="info-row"><strong>Zeit:</strong> ${orderData.deliveryTime === 'asap' ? 'So schnell wie möglich' : `Um ${orderData.specificTime} Uhr`}</div>
+                <div class=\"info-row\"><strong>Zeit:</strong> ${orderData.deliveryTime === 'asap' ? 'So schnell wie möglich' : `Um ${orderData.specificTime} Uhr`}</div>
               </div>
 
-              <div class="section">
-                <div class="section-title">Bestellung</div>
+              <div class=\"section\">
+                <div class=\"section-title\">Bestellung</div>
                 ${orderData.orderItems.map(item => {
                   let itemDetails = [];
                   if (item.selectedSize) {
@@ -113,12 +113,12 @@ Deno.serve(async (req: Request) => {
                   }
 
                   return `
-                    <div class="order-item">
-                      <div style="font-weight: bold; margin-bottom: 5px;">
+                    <div class=\"order-item\">
+                      <div style=\"font-weight: bold; margin-bottom: 5px;\">
                         ${item.quantity}x Nr. ${item.menuItemNumber} ${item.name}
                       </div>
-                      ${itemDetails.length > 0 ? `<div style="font-size: 14px; color: #666;">${itemDetails.join(' • ')}</div>` : ''}
-                      <div style="text-align: right; margin-top: 5px; font-weight: bold;">
+                      ${itemDetails.length > 0 ? `<div style=\"font-size: 14px; color: #666;\">${itemDetails.join(' • ')}</div>` : ''}
+                      <div style=\"text-align: right; margin-top: 5px; font-weight: bold;\">
                         ${item.totalPrice.toFixed(2).replace('.', ',')} €
                       </div>
                     </div>
@@ -126,27 +126,27 @@ Deno.serve(async (req: Request) => {
                 }).join('')}
               </div>
 
-              <div class="total-section">
-                <div class="total-row">
+              <div class=\"total-section\">
+                <div class=\"total-row\">
                   <span>Zwischensumme:</span>
                   <span>${orderData.subtotal.toFixed(2).replace('.', ',')} €</span>
                 </div>
                 ${orderData.deliveryFee > 0 ? `
-                  <div class="total-row">
+                  <div class=\"total-row\">
                     <span>Liefergebühr:</span>
                     <span>${orderData.deliveryFee.toFixed(2).replace('.', ',')} €</span>
                   </div>
                 ` : ''}
-                <div class="total-row grand-total">
+                <div class=\"total-row grand-total\">
                   <span>Gesamtbetrag:</span>
                   <span>${orderData.total.toFixed(2).replace('.', ',')} €</span>
                 </div>
               </div>
 
               ${orderData.note ? `
-                <div class="section">
-                  <div class="section-title">Anmerkung</div>
-                  <div style="background-color: white; padding: 15px; border-radius: 5px;">
+                <div class=\"section\">
+                  <div class=\"section-title\">Anmerkung</div>
+                  <div style=\"background-color: white; padding: 15px; border-radius: 5px;\">
                     ${orderData.note}
                   </div>
                 </div>
