@@ -122,10 +122,14 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
 
                 <button
                   onClick={() => handleItemClick(item)}
-                  className="flex items-center gap-1.5 bg-orange-500 text-white px-3 py-1.5 rounded-lg hover:bg-orange-600 transition transform hover:scale-105 text-sm font-medium shadow-md hover:shadow-lg whitespace-nowrap"
+                  className="group relative flex items-center justify-center bg-orange-500 text-white w-10 h-10 rounded-full hover:bg-orange-600 transition-all transform hover:scale-110 shadow-md hover:shadow-xl"
+                  aria-label="Hinzufügen"
+                  title="Hinzufügen"
                 >
-                  <Plus className="w-4 h-4" />
-                  Hinzufügen
+                  <ShoppingCart className="w-5 h-5 group-hover:animate-pulse" />
+                  <span className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-900 text-white text-xs py-1 px-2 rounded whitespace-nowrap pointer-events-none">
+                    Hinzufügen
+                  </span>
                 </button>
               </div>
             </div>
