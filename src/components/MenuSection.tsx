@@ -44,14 +44,14 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
   if (!items.length) return null;
 
   return (
-    <section className={`mb-8 ${title === 'Fleischgerichte' ? 'mt-8' : ''}`}>
-      <header className={`${bgColor} text-white p-2 rounded-t-xl`}>
-        <div className="flex items-center gap-2 mb-1">
+    <section className={`mb-6 ${title === 'Fleischgerichte' ? 'mt-8' : ''}`}>
+      <header className={`${bgColor} text-white px-3 py-2 rounded-t-xl`}>
+        <div className="flex items-center gap-2">
           <ChefHat className="w-5 h-5" />
-          <h2 className="text-lg font-bold">{title}</h2>
+          <h2 className="text-base font-bold">{title}</h2>
         </div>
-        {description && <p className="text-sm opacity-90 leading-relaxed mt-0.5">{description}</p>}
-        {subTitle && <p className="text-sm opacity-80 mt-0.5 italic">{subTitle}</p>}
+        {description && <p className="text-xs opacity-90 leading-relaxed mt-1">{description}</p>}
+        {subTitle && <p className="text-xs opacity-80 mt-0.5 italic">{subTitle}</p>}
       </header>
 
       <div className="bg-white rounded-b-xl shadow-lg overflow-hidden border border-gray-100">
@@ -65,16 +65,16 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
           return (
             <div
               key={`${item.id}-${i}`}
-              className={`p-6 hover:bg-gray-50 transition flex justify-between items-center ${
+              className={`p-4 hover:bg-gray-50 transition flex justify-between items-center ${
                 !isLastItem ? 'border-b border-gray-200' : ''
               }`}
             >
-              <div className="flex items-center gap-4 flex-1">
-                <span className="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex justify-center items-center font-bold">
+              <div className="flex items-center gap-3 flex-1">
+                <span className="w-9 h-9 bg-orange-100 text-orange-600 rounded-full flex justify-center items-center font-bold text-sm flex-shrink-0">
                   {item.number}
                 </span>
-                <div>
-                  <h3 className={`text-lg font-bold ${isRippchenSpecial || isSchnitzelSpecial ? 'text-red-600' : 'text-gray-900'} flex items-center gap-2`}>
+                <div className="flex-1 min-w-0">
+                  <h3 className={`text-base font-bold ${isRippchenSpecial || isSchnitzelSpecial ? 'text-red-600' : 'text-gray-900'} flex items-center gap-2`}>
                     {item.name}
                     {[593, 594].includes(item.id) && (
                       <span className="text-xs font-bold px-2 py-0.5 rounded bg-gray-900 text-white">
@@ -82,10 +82,10 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
                       </span>
                     )}
                   </h3>
-                  {item.description && <p className="text-gray-600 mt-1">{item.description}</p>}
-                  {item.allergens && <p className="text-xs text-gray-500 mt-2"><strong>Allergene:</strong> <span className="italic">{item.allergens}</span></p>}
+                  {item.description && <p className="text-sm text-gray-600 mt-0.5 leading-snug">{item.description}</p>}
+                  {item.allergens && <p className="text-xs text-gray-500 mt-1.5"><strong>Allergene:</strong> <span className="italic">{item.allergens}</span></p>}
 
-                  <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="flex flex-wrap gap-1.5 mt-2">
                     {isRippchenSpecial && <Badge color="red" icon={<Star className="w-3 h-3" />} text="🔥 RIPPCHEN-TAG SPEZIAL" />}
                     {isSchnitzelSpecial && <Badge color="red" icon={<Star className="w-3 h-3" />} text="🔥 SCHNITZEL-TAG SPEZIAL" />}
                     {hasSizes && <Badge color="blue" icon={<Star className="w-3 h-3" />} text="Größen verfügbar" />}
@@ -99,12 +99,12 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
                 </div>
               </div>
 
-              <div className="flex flex-col items-end gap-3 flex-shrink-0">
+              <div className="flex flex-col items-end gap-2 flex-shrink-0 ml-3">
                 <div className="text-right">
                   {hasSizes ? (
                     <>
-                      <div className="text-sm text-gray-600">ab</div>
-                      <div className="text-xl font-bold text-orange-600">{minPrice.toFixed(2).replace('.', ',')} €</div>
+                      <div className="text-xs text-gray-600">ab</div>
+                      <div className="text-lg font-bold text-orange-600">{minPrice.toFixed(2).replace('.', ',')} €</div>
                     </>
                   ) : (
                     <PriceDisplay item={item} specialRippchen={isRippchenSpecial} specialSchnitzel={isSchnitzelSpecial} />
@@ -113,7 +113,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
 
                 <button
                   onClick={() => handleItemClick(item)}
-                  className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition transform hover:scale-105 text-sm font-medium shadow-md hover:shadow-lg"
+                  className="flex items-center gap-1.5 bg-orange-500 text-white px-3 py-1.5 rounded-lg hover:bg-orange-600 transition transform hover:scale-105 text-sm font-medium shadow-md hover:shadow-lg whitespace-nowrap"
                 >
                   <Plus className="w-4 h-4" />
                   Hinzufügen
@@ -154,7 +154,7 @@ const Badge: React.FC<BadgeProps> = ({ color, icon, text }) => {
   };
 
   return (
-    <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs ${colors[color]}`}>
+    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs ${colors[color]}`}>
       {icon} {text}
     </span>
   );
@@ -165,12 +165,12 @@ const PriceDisplay: React.FC<{ item: MenuItem; specialRippchen: boolean; special
     const oldPrice = specialRippchen ? 14.90 : 12.90;
     return (
       <>
-        <div className="text-sm text-gray-500 line-through">{oldPrice.toFixed(2).replace('.', ',')} €</div>
-        <div className="text-red-600 font-extrabold animate-pulse">{item.price.toFixed(2).replace('.', ',')} €</div>
+        <div className="text-xs text-gray-500 line-through">{oldPrice.toFixed(2).replace('.', ',')} €</div>
+        <div className="text-lg text-red-600 font-bold animate-pulse">{item.price.toFixed(2).replace('.', ',')} €</div>
       </>
     );
   }
-  return <div>{item.price.toFixed(2).replace('.', ',')} €</div>;
+  return <div className="text-lg font-bold text-gray-900">{item.price.toFixed(2).replace('.', ',')} €</div>;
 };
 
 export default MenuSection;
