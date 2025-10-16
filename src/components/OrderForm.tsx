@@ -36,7 +36,7 @@ interface OrderFormProps {
 
 // Delivery zones with minimum order and delivery fee
 const DELIVERY_ZONES = {
-  '21435-ashausen': { label: '21435, Ashausen', minOrder: 30, fee: 3 },
+  '21435-ashausen': { label: '21435, Ashausen', minOrder: 12, fee: 1 },
   '21423-bahlburg': { label: '21423, Bahlburg', minOrder: 30, fee: 3 },
   '24616-borstel': { label: '24616, Borstel', minOrder: 30, fee: 3 },
   '21438-brackel-1': { label: '21438, Brackel', minOrder: 30, fee: 3 },
@@ -49,10 +49,9 @@ const DELIVERY_ZONES = {
   '21220-holtorfsloh': { label: '21220, Holtorfsloh', minOrder: 30, fee: 3 },
   '21423-hoopte': { label: '21423, Hoopte', minOrder: 30, fee: 3 },
   '21423-luhdorf': { label: '21423, Luhdorf', minOrder: 30, fee: 3 },
-  '21423-pattensen-1': { label: '21423, Pattensen', minOrder: 30, fee: 3 },
-  '21423-pattensen-2': { label: '21423, Pattensen', minOrder: 30, fee: 3 },
+  '21423-pattensen': { label: '21423, Pattensen', minOrder: 20, fee: 2.5 },
   '21423-roydorf': { label: '21423, Roydorf', minOrder: 30, fee: 3 },
-  '21423-scharmbeck': { label: '21423, Scharmbeck', minOrder: 30, fee: 3 },
+  '21423-scharmbeck': { label: '21423, Scharmbeck', minOrder: 17, fee: 2 },
   '21435-stelle-1': { label: '21435, Stelle', minOrder: 30, fee: 3 },
   '21435-stelle-2': { label: '21435, Stelle', minOrder: 30, fee: 3 },
   '21423-stoeckte': { label: '21423, Stöckte', minOrder: 30, fee: 3 },
