@@ -23,10 +23,11 @@ interface MenuSectionProps {
     selectedExclusions?: string[],
     selectedSideDish?: string
   ) => void;
+  onModalStateChange?: (isOpen: boolean) => void;
 }
 
 
-const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle, items, bgColor = 'bg-orange-500', onAddToOrder }) => {
+const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle, items, bgColor = 'bg-orange-500', onAddToOrder, onModalStateChange }) => {
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const today = new Date().getDay();
 
@@ -36,10 +37,18 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
                         (item.id >= 564 && item.id <= 568 && item.isSpezialitaet) ||
                         [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57].includes(item.number) ||
                         [593, 594].includes(item.id); // Alcoholic drinks need age confirmation
-    needsConfig ? setSelectedItem(item) : onAddToOrder(item);
-  }, [onAddToOrder]);
+    if (needsConfig) {
+      setSelectedItem(item);
+      onModalStateChange?.(true);
+    } else {
+      onAddToOrder(item);
+    }
+  }, [onAddToOrder, onModalStateChange]);
 
-  const closeModal = useCallback(() => setSelectedItem(null), []);
+  const closeModal = useCallback(() => {
+    setSelectedItem(null);
+    onModalStateChange?.(false);
+  }, [onModalStateChange]);
 
   if (!items.length) return null;
 

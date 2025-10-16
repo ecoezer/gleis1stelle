@@ -69,6 +69,7 @@ function App() {
   const [showMobileCart, setShowMobileCart] = useState(false);
   const [cartAnimation, setCartAnimation] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Responsive updates
   useEffect(() => {
@@ -205,6 +206,7 @@ function App() {
                   items={filtered}
                   bgColor='bg-orange-500'
                   onAddToOrder={memoizedAddItem}
+                  onModalStateChange={setIsModalOpen}
                 />
               </div>
             );
@@ -226,9 +228,9 @@ function App() {
       )}
 
       {/* Mobile Cart Button */}
-      {isMobile && totalItemsCount > 0 && (
+      {isMobile && totalItemsCount > 0 && !isModalOpen && (
         <button id="mobile-cart-button" onClick={toggleMobileCart}
-          className={`fixed bottom-4 left-1/2 -translate-x-1/2 w-[90vw] bg-orange-500 text-white py-2 px-4 rounded-full shadow-xl flex items-center justify-center z-50`}>
+          className={`fixed bottom-4 left-1/2 -translate-x-1/2 w-[90vw] bg-orange-500 text-white py-2 px-4 rounded-full shadow-xl flex items-center justify-center z-50 transition-all duration-300 ease-in-out ${isModalOpen ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
           <div className="relative flex-shrink-0">
             <div className={`w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center ${cartAnimation ? 'animate-cart-mobile-pulse' : ''}`}>
               <ShoppingCart className={`w-4 h-4 ${cartAnimation ? 'animate-cart-shake' : ''}`} />
