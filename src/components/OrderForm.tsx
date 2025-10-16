@@ -592,6 +592,37 @@ const OrderForm: React.FC<OrderFormProps> = ({
         </div>
 
         <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+          {watchOrderType === 'delivery' && watchDeliveryZone && (() => {
+            const zone = DELIVERY_ZONES[watchDeliveryZone as keyof typeof DELIVERY_ZONES];
+            if (!zone) return null;
+
+            const remaining = zone.minOrder - subtotal;
+            const progress = Math.min((subtotal / zone.minOrder) * 100, 100);
+
+            return (
+              <div className="mb-3 space-y-2">
+                <div className="text-sm text-gray-700">
+                  {remaining > 0 ? (
+                    <>Noch <span className="font-semibold">{remaining.toFixed(2).replace('.', ',')} €</span> bis der Mindestbestellwert erreicht ist</>
+                  ) : (
+                    <span className="font-semibold text-green-700">✓ Mindestbestellwert erreicht</span>
+                  )}
+                </div>
+                <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="absolute inset-y-0 left-0 rounded-full transition-all duration-500 ease-out"
+                    style={{
+                      width: `${progress}%`,
+                      background: progress >= 100
+                        ? 'linear-gradient(90deg, #15803d 0%, #22c55e 100%)'
+                        : 'linear-gradient(90deg, #ea580c 0%, #f59e0b 50%, #eab308 100%)'
+                    }}
+                  />
+                </div>
+              </div>
+            );
+          })()}
+
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-600">Zwischensumme</span>
             <span className="font-medium text-gray-900">{subtotal.toFixed(2).replace('.', ',')} €</span>
