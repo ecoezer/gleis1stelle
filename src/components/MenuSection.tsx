@@ -60,11 +60,14 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, description, subTitle,
           const isSchnitzelSpecial = [546,547,548,549].includes(item.id) && today === 4;
           const hasSizes = item.sizes?.length > 0;
           const minPrice = hasSizes ? Math.min(...item.sizes!.map(s => s.price)) : item.price;
+          const isLastItem = i === items.length - 1;
 
           return (
             <div
               key={`${item.id}-${i}`}
-              className="p-6 hover:bg-gray-50 transition flex justify-between items-center"
+              className={`p-6 hover:bg-gray-50 transition flex justify-between items-center ${
+                !isLastItem ? 'border-b border-gray-200' : ''
+              }`}
             >
               <div className="flex items-center gap-4 flex-1">
                 <span className="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex justify-center items-center font-bold">
