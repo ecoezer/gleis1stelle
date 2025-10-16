@@ -184,7 +184,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
       let itemText = `${item.quantity}x Nr. ${item.menuItem.number} ${item.menuItem.name}`;
 
       if (item.selectedSize) {
-        itemText += ` (${item.selectedSize.name}${item.selectedSize.description ? ` - ${item.selectedSize.description}` : ''})`;
+        itemText += ` (${item.selectedSize.name})`;
       }
 
       if (item.selectedPastaType) {
@@ -498,7 +498,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
                 <div className="space-y-1.5">
                   {item.selectedSize && (
                     <div className="text-xs text-gray-600">
-                      {item.selectedSize.name}{item.selectedSize.description && ` - ${item.selectedSize.description}`}
+                      {item.selectedSize.name}
                     </div>
                   )}
 
