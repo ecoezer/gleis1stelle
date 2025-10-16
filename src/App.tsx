@@ -228,7 +228,7 @@ function App() {
       {/* Mobile Cart Button */}
       {isMobile && totalItemsCount > 0 && (
         <button id="mobile-cart-button" onClick={toggleMobileCart}
-          className={`fixed bottom-4 left-4 right-4 bg-orange-500 text-white py-2 px-4 rounded-full shadow-xl flex items-center justify-center z-50`}>
+          className={`fixed bottom-4 left-1/2 -translate-x-1/2 w-[70vw] bg-orange-500 text-white py-2 px-4 rounded-full shadow-xl flex items-center justify-center z-50`}>
           <div className="relative flex-shrink-0">
             <div className={`w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center ${cartAnimation ? 'animate-cart-mobile-pulse' : ''}`}>
               <ShoppingCart className={`w-4 h-4 ${cartAnimation ? 'animate-cart-shake' : ''}`} />
