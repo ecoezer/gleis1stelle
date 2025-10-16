@@ -367,12 +367,12 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl max-w-lg w-full max-h-[85vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2 sm:p-4">
+      <div className="bg-white rounded-xl max-w-lg w-full max-h-[92vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-orange-500 text-white p-4 rounded-t-xl flex justify-between items-center">
+        <div className="sticky top-0 bg-orange-500 text-white p-3 rounded-t-xl flex justify-between items-center">
           <div>
-            <h2 className="text-xl font-bold flex items-center gap-2">
+            <h2 className="text-base sm:text-lg font-bold flex items-center gap-2">
               {getModalTitle()}
               {[593, 594].includes(item.id) && (
                 <span className="text-xs font-bold px-2 py-0.5 rounded bg-white text-gray-900">
@@ -381,20 +381,20 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
               )}
             </h2>
             {currentStep === 'meat' && item.description && (
-              <p className="text-sm opacity-90 mt-1">{item.description}</p>
+              <p className="text-xs sm:text-sm opacity-90 mt-0.5">{item.description}</p>
             )}
             {currentStep === 'sauce' && (
-              <p className="text-sm opacity-90 mt-1">
+              <p className="text-xs sm:text-sm opacity-90 mt-0.5">
                 Nr. {item.number} {item.name}
               </p>
             )}
             {currentStep === 'exclusions' && (
-              <p className="text-sm opacity-90 mt-1">
+              <p className="text-xs sm:text-sm opacity-90 mt-0.5">
                 mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
               </p>
             )}
             {currentStep === 'sidedish' && (
-              <p className="text-sm opacity-90 mt-1">
+              <p className="text-xs sm:text-sm opacity-90 mt-0.5">
                 mit {selectedSauces.length > 0 ? selectedSauces.join(', ') : 'ohne Soße'} - Nr. {item.number} {item.name}
               </p>
             )}
@@ -420,7 +420,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           </div>
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="p-3 sm:p-4 space-y-3 sm:space-y-4">
           {/* Allergen Information Banner */}
           {item.allergens && allergenList.length > 0 && (
             <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-2">
@@ -473,43 +473,47 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
 
           {/* Step indicator for meat selection items */}
           {item.isMeatSelection && (
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <div className={`flex items-center space-x-2 ${currentStep === 'meat' ? 'text-orange-600' : 'text-gray-400'}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+            <div className="flex items-center justify-center space-x-1 sm:space-x-2 mb-2 sm:mb-3">
+              <div className={`flex items-center space-x-1 ${currentStep === 'meat' ? 'text-orange-600' : 'text-gray-400'}`}>
+                <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold ${
                   currentStep === 'meat' ? 'bg-orange-500 text-white' : 'bg-gray-200'
                 }`}>
                   1
                 </div>
-                <span className="text-sm font-medium">Fleisch</span>
+                <span className="text-xs sm:text-sm font-medium hidden sm:inline">Fleisch</span>
+                <span className="text-xs font-medium sm:hidden">F</span>
               </div>
-              <div className={`w-6 h-px ${currentStep === 'sauce' || currentStep === 'exclusions' || currentStep === 'sidedish' ? 'bg-orange-500' : 'bg-gray-300'}`}></div>
-              <div className={`flex items-center space-x-2 ${currentStep === 'sauce' ? 'text-orange-600' : 'text-gray-400'}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+              <div className={`w-4 h-px ${currentStep === 'sauce' || currentStep === 'exclusions' || currentStep === 'sidedish' ? 'bg-orange-500' : 'bg-gray-300'}`}></div>
+              <div className={`flex items-center space-x-1 ${currentStep === 'sauce' ? 'text-orange-600' : 'text-gray-400'}`}>
+                <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold ${
                   currentStep === 'sauce' ? 'bg-orange-500 text-white' : 'bg-gray-200'
                 }`}>
                   2
                 </div>
-                <span className="text-sm font-medium">Soße</span>
+                <span className="text-xs sm:text-sm font-medium hidden sm:inline">Soße</span>
+                <span className="text-xs font-medium sm:hidden">S</span>
               </div>
-              <div className={`w-6 h-px ${currentStep === 'exclusions' || currentStep === 'sidedish' ? 'bg-orange-500' : 'bg-gray-300'}`}></div>
-              <div className={`flex items-center space-x-2 ${currentStep === 'exclusions' ? 'text-orange-600' : 'text-gray-400'}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+              <div className={`w-4 h-px ${currentStep === 'exclusions' || currentStep === 'sidedish' ? 'bg-orange-500' : 'bg-gray-300'}`}></div>
+              <div className={`flex items-center space-x-1 ${currentStep === 'exclusions' ? 'text-orange-600' : 'text-gray-400'}`}>
+                <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold ${
                   currentStep === 'exclusions' ? 'bg-orange-500 text-white' : 'bg-gray-200'
                 }`}>
                   3
                 </div>
-                <span className="text-sm font-medium">Salat</span>
+                <span className="text-xs sm:text-sm font-medium hidden sm:inline">Salat</span>
+                <span className="text-xs font-medium sm:hidden">Sa</span>
               </div>
               {item.number === 4 && (
                 <>
-                  <div className={`w-6 h-px ${currentStep === 'sidedish' ? 'bg-orange-500' : 'bg-gray-300'}`}></div>
-                  <div className={`flex items-center space-x-2 ${currentStep === 'sidedish' ? 'text-orange-600' : 'text-gray-400'}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                  <div className={`w-4 h-px ${currentStep === 'sidedish' ? 'bg-orange-500' : 'bg-gray-300'}`}></div>
+                  <div className={`flex items-center space-x-1 ${currentStep === 'sidedish' ? 'text-orange-600' : 'text-gray-400'}`}>
+                    <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold ${
                       currentStep === 'sidedish' ? 'bg-orange-500 text-white' : 'bg-gray-200'
                     }`}>
                       4
                     </div>
-                    <span className="text-sm font-medium">Beilage</span>
+                    <span className="text-xs sm:text-sm font-medium hidden sm:inline">Beilage</span>
+                    <span className="text-xs font-medium sm:hidden">B</span>
                   </div>
                 </>
               )}
@@ -519,7 +523,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {/* Size Selection */}
           {item.sizes && (!item.isMeatSelection || (currentStep !== 'sauce' && currentStep !== 'exclusions')) && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Größe wählen *</h3>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Größe wählen *</h3>
               <div className="space-y-2">
                 {item.sizes.map((size) => (
                   <label
@@ -558,7 +562,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {/* Wunsch Pizza Ingredients */}
           {item.isWunschPizza && (!item.isMeatSelection || (currentStep !== 'sauce' && currentStep !== 'exclusions')) && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
                 Zutaten wählen ({selectedIngredients.length}/4) *
               </h3>
               <div className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto ingredients-scroll">
@@ -592,7 +596,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {/* Pizza Extras */}
           {(item.isPizza || item.isWunschPizza) && (!item.isMeatSelection || (currentStep !== 'sauce' && currentStep !== 'exclusions')) && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
                 Extras (+1,00€ pro Extra)
               </h3>
               <div className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto">
@@ -621,7 +625,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {/* Pasta Type Selection */}
           {item.isPasta && (!item.isMeatSelection || (currentStep !== 'sauce' && currentStep !== 'exclusions')) && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Nudelsorte wählen *</h3>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Nudelsorte wählen *</h3>
               <div className="space-y-2">
                 {pastaTypes.map((pastaType) => (
                   <label
@@ -650,7 +654,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {/* Meat Selection - Only show in step 1 - Now only Kalb */}
           {item.isMeatSelection && currentStep === 'meat' && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Fleischauswahl</h3>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Fleischauswahl</h3>
               <div className="p-4 rounded-lg border-2 border-orange-500 bg-orange-50">
                 <div className="flex items-center space-x-2">
                   <div className="w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center">
@@ -670,7 +674,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
             (item.isMeatSelection && currentStep === 'sauce') ||
             [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57, 74, 75, 76, 77, 78, 79].includes(item.number)) && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
                 {item.id >= 564 && item.id <= 568 ? 'Dressing wählen' : ((item.isMeatSelection && currentStep === 'sauce') || [74, 75, 76, 77, 78, 79].includes(item.number) ? 'Soßen wählen (max. 3)' : [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57].includes(item.number) ? 'Soße wählen' : 'Soße wählen')}
                 {!item.isMeatSelection && ![8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 50, 51, 52, 53, 54, 55, 56, 57, 74, 75, 76, 77, 78, 79].includes(item.number) && ((item.isSpezialitaet && ![81, 82].includes(item.id)) || (item.id >= 564 && item.id <= 568)) ? ' *' : ''}
               </h3>
@@ -761,7 +765,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {/* Beer Selection */}
           {item.isBeerSelection && (!item.isMeatSelection || (currentStep !== 'sauce' && currentStep !== 'exclusions')) && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Bier wählen *</h3>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Bier wählen *</h3>
               <div className="space-y-2">
                 {beerTypes.map((beer) => (
                   <label
@@ -790,8 +794,8 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {/* Salad Exclusions - Only show in step 3 for meat selection items */}
           {item.isMeatSelection && currentStep === 'exclusions' && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Salat anpassen (mehrere möglich, optional)</h3>
-              <p className="text-sm text-gray-600 mb-4">Wählen Sie aus, was Sie nicht in Ihrem Salat möchten:</p>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Salat anpassen (mehrere möglich, optional)</h3>
+              <p className="text-xs sm:text-sm text-gray-600 mb-2">Wählen Sie aus, was Sie nicht in Ihrem Salat möchten:</p>
               <div className="space-y-2">
                 {getVisibleExclusionOptions().map((exclusion) => (
                   <label
@@ -845,7 +849,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           {/* Side Dish Selection - Only show in step 4 for item #4 */}
           {item.number === 4 && item.isMeatSelection && currentStep === 'sidedish' && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Beilage wählen *</h3>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Beilage wählen *</h3>
               <div className="space-y-2">
                 {sideDishOptions.map((sideDish) => (
                   <label
@@ -872,7 +876,7 @@ const ItemModal: React.FC<ItemModalProps> = ({ item, isOpen, onClose, onAddToOrd
           )}
 
           {/* Add to Cart Button */}
-          <div className="sticky bottom-0 bg-white pt-4 border-t">
+          <div className="sticky bottom-0 bg-white pt-3 pb-1 border-t">
             {/* Buttons for Step 2, Step 3, and Step 4 - Side by side */}
             {item.isMeatSelection && (currentStep === 'sauce' || currentStep === 'exclusions' || currentStep === 'sidedish') ? (
               <div className="flex gap-3">
