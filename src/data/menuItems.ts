@@ -44,7 +44,7 @@ export const saladExclusionOptions = [
 ] as const;
 
 // Side dish options for Drehspieß Teller
-export const sideDishOptions = ['Pommes frites', 'Bulgur'] as const;
+export const sideDishOptions = ['Pommes frites'] as const;
 
 // Wunsch Pizza ingredients
 export const wunschPizzaIngredients = [
